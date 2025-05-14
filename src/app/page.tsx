@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import BlogSection from "@/components/homepage/BlogSection";
 import EventSection from "@/components/homepage/EventSection";
+import Introduction from "@/components/homepage/Introduction";
 import WisataCategory from "@/components/homepage/WisataCategory";
 import EyeCatcher from "@/components/shared/EyeCatcher";
 
@@ -9,6 +10,7 @@ export default function Home() {
     <>
       <Hero />
       <div className="padding-x">
+        <Introduction />
         <WisataCategory />
         <EventSection />
         <BlogSection />

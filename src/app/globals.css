@@ -132,11 +132,23 @@
   body {
     @apply bg-background text-brand;
   }
+
+  p {
+    @apply 2xl:text-lg tracking-tight;
+  }
+
+  h1 {
+    @apply text-5xl xl:text-8xl 2xl:text-9xl font-mak uppercase;
+  }
+
+  h2 {
+    @apply text-2xl xl:text-5xl 2xl:text-7xl font-mak uppercase;
+  }
 }
 
 @layer components {
   .section {
-    @apply w-full h-full py-20;
+    @apply w-full h-full my-30 xl:my-40;
   }
 
   .button-brand {
@@ -146,12 +158,4 @@
   .padding-x {
     @apply px-4 sm:px-8 xl:px-16 2xl:px-20;
   }
-}
-
-h1 {
-  @apply text-5xl xl:text-8xl 2xl:text-9xl font-mak uppercase;
-}
-
-h2 {
-  @apply text-2xl xl:text-5xl 2xl:text-7xl font-mak uppercase;
 }
