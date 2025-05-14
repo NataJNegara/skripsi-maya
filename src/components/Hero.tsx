@@ -3,15 +3,15 @@ import bg from "../../public/images/muara-enim.jpg";
 
 const Hero = () => {
   return (
-    <div className="h-screen w-full relative pt-20">
-      <div className="h-[calc(100vh-160px)] relative">
+    <div className="h-screen w-full relative">
+      <div className="h-screen relative">
         <Image
           src={bg}
           fill
           alt="muara enim landscape image"
           quality={60}
           placeholder="blur"
-          className="object-cover rounded-2xl"
+          className="object-cover"
         />
       </div>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-full">
@@ -20,7 +20,7 @@ const Hero = () => {
             worderful
           </p>
           <h1>Muara Enim</h1>
-          <p className="text-center w-1/2 mx-auto">
+          <p className="text-center px-10 xl:w-1/2 mx-auto">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
             in dolorum reiciendis necessitatibus cupiditate hic quidem libero.
             Cupiditate, dolorum suscipit?

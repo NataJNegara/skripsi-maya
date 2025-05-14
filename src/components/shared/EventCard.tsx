@@ -13,7 +13,7 @@ type EventCardProp = {
 const EventCard = (props: EventCardProp) => {
   return (
     <div key={props.event.title}>
-      <div className="relative w-full h-40 xl:h-60 2xl:h-72 rounded-2xl overflow-hidden mb-4">
+      <div className="relative w-full h-52 xl:h-60 2xl:h-72 rounded-2xl overflow-hidden mb-4">
         <Image
           src={props.event.bgImage}
           fill

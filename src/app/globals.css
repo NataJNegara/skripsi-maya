@@ -136,16 +136,20 @@
 
 @layer components {
   .section {
-    @apply w-full min-h-screen h-full py-20;
+    @apply w-full h-full py-20;
   }
 
   .button-brand {
     @apply bg-brand hover:bg-brand-secondary text-brand-white transition-all duration-300;
   }
+
+  .padding-x {
+    @apply px-4 sm:px-8 xl:px-16 2xl:px-20;
+  }
 }
 
 h1 {
-  @apply text-2xl xl:text-8xl 2xl:text-9xl font-mak uppercase;
+  @apply text-5xl xl:text-8xl 2xl:text-9xl font-mak uppercase;
 }
 
 h2 {

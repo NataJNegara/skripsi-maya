@@ -7,8 +7,8 @@ import EyeCatcher from "@/components/shared/EyeCatcher";
 export default function Home() {
   return (
     <>
-      <div className="min-h-screen h-full px-20">
-        <Hero />
+      <Hero />
+      <div className="padding-x">
         <WisataCategory />
         <EventSection />
         <BlogSection />

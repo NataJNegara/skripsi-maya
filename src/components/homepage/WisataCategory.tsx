@@ -5,7 +5,7 @@ import Link from "next/link";
 const WisataCategory = () => {
   return (
     <section className="section">
-      <div className="2xl:w-1/2 mb-16">
+      <div className="xl:w-1/2 mb-16">
         <h2>Wisata</h2>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
@@ -18,11 +18,11 @@ const WisataCategory = () => {
         </p>
       </div>
 
-      <div className="flex gap-8 justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 xl:px-10 items-center justify-center">
         {wisataData.map((wisata) => (
           <div
             key={wisata.title}
-            className="relative h-[300px] w-[100px] xl:h-[500px] xl:w-[300px] 2xl:h-[600px] 2xl:w-[400px] rounded-2xl overflow-hidden hover:[&_img]:scale-105 hover:[&_img]:grayscale-50">
+            className="relative h-[400px] xl:h-[500px]  2xl:h-[600px]  rounded-2xl overflow-hidden hover:[&_img]:scale-105 hover:[&_img]:grayscale-50">
             <Image
               src={wisata.bgImage}
               fill
