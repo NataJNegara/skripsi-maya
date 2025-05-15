@@ -158,4 +158,20 @@
   .padding-x {
     @apply px-4 sm:px-8 xl:px-16 2xl:px-20;
   }
+
+  .sub-title {
+    @apply uppercase text-xs font-bold text-brand-secondary;
+  }
+
+  /* horizontal scroll */
+  .scroll-section-outer {
+    @apply overflow-hidden px-0 bg-brand text-brand-secondary;
+  }
+  .scroll-section-inner {
+    @apply h-screen w-[360vw] flex flex-row;
+  }
+  .scroll-section {
+    @apply h-screen w-screen;
+  }
+  /* end of horizontal scroll */
 }

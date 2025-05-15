@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Introduction = () => {
   return (
-    <section className="min-h-screen section">
+    <section className="min-h-screen section padding-x">
       <div className="grid xl:grid-cols-2 gap-8 xl:gap-32">
         <div className="relative h-[70vh] xl:h-full xl:min-h-screen">
           <Image
@@ -15,9 +15,7 @@ const Introduction = () => {
         </div>
         <div className="xl:p-10 2xl:p-20">
           <div className="flex flex-col gap-4 mb-16">
-            <p className="uppercase text-xs font-bold text-brand-secondary">
-              selamat datang
-            </p>
+            <p className="sub-title">selamat datang</p>
             <p className="text-2xl xl:text-3xl 2xl:text-5xl font-semibold font-mak">
               Muara Enim Kota Serasan Sekundang
             </p>
