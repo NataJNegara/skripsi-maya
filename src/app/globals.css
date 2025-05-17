@@ -165,13 +165,17 @@
 
   /* horizontal scroll */
   .scroll-section-outer {
-    @apply overflow-hidden px-0 bg-brand text-brand-secondary;
+    @apply overflow-hidden bg-brand text-brand-secondary px-0;
   }
   .scroll-section-inner {
-    @apply h-screen w-[360vw] flex flex-row;
+    @apply h-full xl:h-screen xl:w-[360vw] flex flex-col xl:flex-row;
   }
   .scroll-section {
-    @apply h-screen w-screen;
+    @apply xl:h-screen w-screen px-4 xl:p-0;
   }
   /* end of horizontal scroll */
+
+  .page-container {
+    @apply min-h-screen h-full w-full xl:max-w-5xl 2xl:max-w-7xl mx-auto  py-32 xl:py-38 px-4 xl:px-0;
+  }
 }

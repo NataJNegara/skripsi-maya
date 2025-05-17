@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { CircleUserRound, Menu } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const navigationLinks = [
@@ -15,6 +16,7 @@ const navigationLinks = [
 const Header = () => {
   const [prevScroll, setPrevScroll] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const pathname = usePathname();
 
   const navRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +46,8 @@ const Header = () => {
       ref={navRef}
       className={cn(
         "fixed w-full padding-x z-50 text-white transition-all duration-300",
-        isVisible ? "" : "-translate-y-full"
+        isVisible ? "" : "-translate-y-full",
+        pathname !== "/" ? "text-brand!" : ""
       )}>
       <div className="h-20 grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center justify-between">
         <Link href="/" className="uppercase text-2xl font-bold font-mak">

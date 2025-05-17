@@ -13,27 +13,30 @@ const HorizontalSection = () => {
   gsap.registerPlugin(ScrollTrigger);
 
   useEffect(() => {
-    const pin = gsap.fromTo(
-      sectionRef.current,
-      {
-        translateX: 0,
-      },
-      {
-        translateX: "-270vw",
-        ease: "none",
-        duration: 1,
-        scrollTrigger: {
-          trigger: triggerRef.current,
-          start: "top top",
-          end: "2000 top",
-          scrub: 1.2,
-          pin: true,
+    let pin = undefined;
+    if (window.innerWidth >= 1280) {
+      pin = gsap.fromTo(
+        sectionRef.current,
+        {
+          translateX: 0,
         },
-      }
-    );
+        {
+          translateX: "-270vw",
+          ease: "none",
+          duration: 1,
+          scrollTrigger: {
+            trigger: triggerRef.current,
+            start: "top top",
+            end: "2000 top",
+            scrub: 1.2,
+            pin: true,
+          },
+        }
+      );
+    }
 
     return () => {
-      pin.kill();
+      pin?.kill();
     };
   }, []);
 

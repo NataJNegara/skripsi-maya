@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type PostCardProp = {
   post: {
@@ -13,16 +14,22 @@ type PostCardProp = {
 const PostCard = (props: PostCardProp) => {
   return (
     <div key={props.post.title}>
-      <div className="relative w-full h-40 xl:h-60 2xl:h-72 rounded-2xl overflow-hidden mb-4">
-        <Image
-          src={props.post.bgImage}
-          fill
-          alt={`image of ${props.post.title}`}
-          className="object-cover"
-        />
-      </div>
+      <Link href={`/blog/${props.post.href}`}>
+        <div className="relative w-full h-60 sm:h-72 overflow-hidden mb-4">
+          <Image
+            src={props.post.bgImage}
+            fill
+            alt={`image of ${props.post.title}`}
+            className="object-cover hover:scale-105 transition-all duration-300"
+          />
+        </div>
+      </Link>
       <div className="flex flex-col gap-4">
-        <p className="text-xl font-semibold">{props.post.title}</p>
+        <Link
+          href={`/blog/${props.post.href}`}
+          className="text-xl font-semibold">
+          {props.post.title}
+        </Link>
         <p>{props.post.preview}</p>
         <p className="text-sm text-gray-400">{props.post.date}</p>
       </div>

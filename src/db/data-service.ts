@@ -70,7 +70,16 @@ export const blogsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title-slug",
+    body: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci.`,
+    href: "event-title-slug",
     bgImage: "/images/blog-01.jpg",
     date: "28/05/2025",
   },
@@ -79,7 +88,16 @@ export const blogsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title",
+    body: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci.`,
+    href: "event-title",
     bgImage: "/images/blog-01.jpg",
     date: "28/05/2025",
   },
@@ -88,7 +106,16 @@ export const blogsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title-slug",
+    body: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci.`,
+    href: "event-title-slug",
     bgImage: "/images/blog-01.jpg",
     date: "28/05/2025",
   },
@@ -97,7 +124,16 @@ export const blogsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title-slug",
+    body: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci.`,
+    href: "event-title-slug",
     bgImage: "/images/blog-01.jpg",
     date: "28/05/2025",
   },
