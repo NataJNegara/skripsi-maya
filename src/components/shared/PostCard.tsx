@@ -14,7 +14,7 @@ type PostCardProp = {
 const PostCard = (props: PostCardProp) => {
   return (
     <div key={props.post.title}>
-      <Link href={`/blog/${props.post.href}`}>
+      <Link href={`/blogs/${props.post.href}`}>
         <div className="relative w-full h-60 sm:h-72 overflow-hidden mb-4">
           <Image
             src={props.post.bgImage}
@@ -26,7 +26,7 @@ const PostCard = (props: PostCardProp) => {
       </Link>
       <div className="flex flex-col gap-4">
         <Link
-          href={`/blog/${props.post.href}`}
+          href={`/blogs/${props.post.href}`}
           className="text-xl font-semibold">
           {props.post.title}
         </Link>

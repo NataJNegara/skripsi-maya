@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
 
 const navigationLinks = [
   { title: "Destinasi", href: "/destinasi" },
-  { title: "Event", href: "/event" },
-  { title: "Blog", href: "/blog" },
+  { title: "Event", href: "/events" },
+  { title: "Blog", href: "/blogs" },
   { title: "Tentang", href: "/tentang" },
 ];
 

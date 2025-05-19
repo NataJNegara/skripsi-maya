@@ -1,8 +1,8 @@
 import Link from "next/link";
-import EventCard from "../shared/EventCard";
 import { blogsData } from "@/db/data-service";
+import PostCard from "../shared/PostCard";
 
-const displayedEvents = blogsData.slice(0, 3);
+const displayedPosts = blogsData.slice(0, 3);
 
 const BlogSection = () => {
   return (
@@ -19,14 +19,12 @@ const BlogSection = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-center items-center 2xl:px-16 mb-16">
-        {displayedEvents.map((event) => (
-          <EventCard event={event} key={event.title} />
+        {displayedPosts.map((post) => (
+          <PostCard post={post} key={post.title} />
         ))}
       </div>
       <div className="text-center">
-        <Link
-          href="/events"
-          className="w-fit button-brand py-4 px-8 rounded-full">
+        <Link href="/events" className="w-fit button-brand py-4 px-8">
           Lihat Semua
         </Link>
       </div>

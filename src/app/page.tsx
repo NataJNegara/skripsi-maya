@@ -10,12 +10,19 @@ export default function Home() {
     <>
       <Hero />
       <Introduction />
+      <EyeCatcher
+        text="setiap perjalanan bukan hanya tentang tempat tapi tentang pulang dengan cerita"
+        imageSrc="/images/eye-catcher-02.jpg"
+      />
       <HorizontalSection />
       <div className="padding-x">
         <EventSection />
         <BlogSection />
       </div>
-      <EyeCatcher />
+      <EyeCatcher
+        text="bagikan kenangan anda #TandangMuaraEnim"
+        imageSrc="/images/eye-catcher-01.jpg"
+      />
     </>
   );
 }

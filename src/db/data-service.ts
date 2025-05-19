@@ -31,7 +31,7 @@ export const eventsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title-slug",
+    href: "event-title-slug",
     bgImage: "/images/event-01.jpg",
     date: "28/05/2025 - 01/06/2025",
   },
@@ -40,7 +40,7 @@ export const eventsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title",
+    href: "event-title",
     bgImage: "/images/event-01.jpg",
     date: "28/05/2025 - 01/06/2025",
   },
@@ -49,7 +49,7 @@ export const eventsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title-slug",
+    href: "event-title-slug",
     bgImage: "/images/event-01.jpg",
     date: "28/05/2025 - 01/06/2025",
   },
@@ -58,7 +58,7 @@ export const eventsData = [
     preview: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
               excepturi consequuntur reprehenderit quasi earum magnam asperiores
               nemo libero adipisci.`,
-    href: "/event-title-slug",
+    href: "event-title-slug",
     bgImage: "/images/event-01.jpg",
     date: "28/05/2025 - 01/06/2025",
   },

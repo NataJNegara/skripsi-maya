@@ -24,9 +24,7 @@ const EventSection = () => {
         ))}
       </div>
       <div className="text-center">
-        <Link
-          href="/events"
-          className="w-fit button-brand py-4 px-8 rounded-full">
+        <Link href="/events" className="w-fit button-brand py-4 px-8">
           Lihat Semua
         </Link>
       </div>
