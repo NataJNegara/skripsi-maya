@@ -1,9 +1,8 @@
+import { fontMak } from "@/assets/fonts";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { fontMak } from "@/assets/fonts";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${fontMak.variable} antialiased`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        className={`${geistSans.variable} ${geistMono.variable} ${fontMak.variable} antialiased relative`}>
+        {children}
+        <Toaster richColors theme="light" />
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Separator } from "./ui/separator";
+import { footerSocials } from "@/db/data-service";
 
 const footerLinks = [
   { title: "destinasi", href: "/destinasi" },
@@ -7,12 +8,6 @@ const footerLinks = [
   { title: "blog", href: "/blog" },
   { title: "tentang", href: "/tentang" },
   { title: "faq", href: "/faq" },
-];
-
-const footerSocials = [
-  { title: "instagram", href: "/" },
-  { title: "facebook", href: "/" },
-  { title: "youtube", href: "/" },
 ];
 
 const Footer = () => {

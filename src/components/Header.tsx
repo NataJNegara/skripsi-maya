@@ -1,10 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { CircleUserRound, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Navigation from "./shared/Navigation";
 
 const navigationLinks = [
   { title: "Destinasi", href: "/destinasi" },
@@ -65,10 +65,7 @@ const Header = () => {
           </ul>
         </nav>
         <div className="hidden lg:block justify-self-end">
-          <CircleUserRound className="w-8 h-8" strokeWidth={1} />
-        </div>
-        <div className="block lg:hidden justify-self-end">
-          <Menu />
+          <Navigation isScrolled={prevScroll > 100} pathname={pathname} />
         </div>
       </div>
     </div>

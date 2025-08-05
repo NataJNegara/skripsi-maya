@@ -138,3 +138,16 @@ export const blogsData = [
     date: "28/05/2025",
   },
 ];
+
+export const navigationLinks = [
+  { title: "Destinasi", href: "/destinasi" },
+  { title: "Event", href: "/events" },
+  { title: "Blog", href: "/blogs" },
+  { title: "Tentang", href: "/tentang" },
+];
+
+export const footerSocials = [
+  { title: "instagram", href: "/" },
+  { title: "facebook", href: "/" },
+  { title: "youtube", href: "/" },
+];
