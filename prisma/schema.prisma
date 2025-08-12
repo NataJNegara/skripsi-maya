@@ -42,7 +42,7 @@ model User {
   emailVerified DateTime? @map("email_verified")
   image         String?
   password      String?
-  role          String    @default("user")
+  role          String    @default("USER")
 
   createdAt DateTime  @default(now()) @db.Timestamp(6)
   updateAt  DateTime  @updatedAt
@@ -58,4 +58,21 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// user fav destination
+model Post {
+  id        String   @id @default(cuid())
+  category  Category @default(POST)
+  title     String
+  slug      String   @unique @map("post_slug_idx")
+  content   String
+  preview   String
+  banner    String
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
+}
+
+// type
+
+enum Category {
+  EVENT
+  POST
+}

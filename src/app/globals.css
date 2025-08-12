@@ -130,20 +130,20 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-brand;
+    @apply bg-background;
   }
 
   p {
     @apply 2xl:text-lg tracking-tight;
   }
 
-  h1 {
+  /* h1 {
     @apply text-5xl xl:text-8xl 2xl:text-9xl font-mak uppercase;
   }
 
   h2 {
     @apply text-2xl xl:text-5xl 2xl:text-7xl font-mak uppercase;
-  }
+  } */
 }
 
 button,
@@ -164,8 +164,13 @@ input {
     @apply px-4 sm:px-8 xl:px-16 2xl:px-20;
   }
 
+  /* TYPOGRAPHY */
   .sub-title {
     @apply uppercase text-xs font-bold text-brand-secondary;
+  }
+
+  .dashboard-title {
+    @apply text-2xl font-semibold;
   }
 
   /* horizontal scroll */
@@ -183,4 +188,19 @@ input {
   .page-container {
     @apply min-h-screen h-full w-full xl:max-w-5xl 2xl:max-w-7xl mx-auto  py-32 xl:py-38 px-4 xl:px-0;
   }
+
+  /* TIPTAP */
+  /* .tiptap-heading-1 {
+    @apply text-4xl font-medium lg:text-6xl md:font-semibold mb-4 text-dark-800 dark:text-dark-300;
+  } */
+  /* .tiptap-heading-2 {
+    @apply text-2xl font-medium lg:text-4xl md:font-semibold mb-4 text-dark-800 dark:text-dark-300;
+  } */
+  /* .tiptap-heading-3 {
+    @apply text-xl font-medium lg:text-3xl md:font-semibold mb-4 text-dark-800 dark:text-dark-300;
+  }
+  .tiptap-heading-4 {
+    @apply text-2xl font-medium md:font-semibold mb-4 text-dark-800 dark:text-dark-300;
+  } */
+  /* END OF TIPTAP */
 }

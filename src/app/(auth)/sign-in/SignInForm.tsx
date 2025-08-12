@@ -10,9 +10,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { signInWithCredential } from "@/lib/actions/authActions";
 import { signInFormSchema } from "@/lib/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const SignInForm = () => {
@@ -24,8 +26,12 @@ const SignInForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof signInFormSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof signInFormSchema>) => {
+    const res = await signInWithCredential(values);
+    if (!res.success) {
+      return toast.error(res.message);
+    }
+    return toast.success(res.message);
   };
 
   return (
