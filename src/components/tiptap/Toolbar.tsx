@@ -1,15 +1,12 @@
 "use client";
 
 import { type Editor } from "@tiptap/react";
-import { Toggle } from "../ui/toggle";
 import {
   AlignCenter,
   AlignJustify,
   AlignLeft,
   AlignRight,
   Bold,
-  Code,
-  Code2,
   Heading2,
   Heading3,
   Heading4,
@@ -23,6 +20,7 @@ import {
   Strikethrough,
 } from "lucide-react";
 import { useCallback } from "react";
+import { Toggle } from "../ui/toggle";
 
 type ToolbarProps = {
   editor: Editor | null;
@@ -183,22 +181,6 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           }>
           <List className="h-4 w-4" />
         </Toggle>
-
-        {/* <Toggle
-          size="sm"
-          pressed={editor.isActive("code")}
-          onPressedChange={() => editor.chain().focus().toggleCode().run()}>
-          <Code className="h-4 w-4" />
-        </Toggle>
-
-        <Toggle
-          size="sm"
-          pressed={editor.isActive("codeBlock")}
-          onPressedChange={() =>
-            editor.chain().focus().toggleCodeBlock().run()
-          }>
-          <Code2 className="h-4 w-4" />
-        </Toggle> */}
 
         <Toggle
           size="sm"
