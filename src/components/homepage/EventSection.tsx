@@ -1,10 +1,11 @@
-import { eventsData } from "@/db/data-service";
+import { getEvents } from "@/lib/actions/postActions";
 import Link from "next/link";
 import EventCard from "../shared/EventCard";
 
-const displayedEvents = eventsData.slice(0, 3);
+const EventSection = async () => {
+  const events = await getEvents();
+  const displayedEvents = events.slice(0, 3);
 
-const EventSection = () => {
   return (
     <section className="section">
       <div className="2xl:w-1/2 mb-16">
@@ -18,16 +19,23 @@ const EventSection = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-center items-center 2xl:px-16 mb-16">
-        {displayedEvents.map((event) => (
-          <EventCard event={event} key={event.title} />
-        ))}
-      </div>
-      <div className="text-center">
-        <Link href="/events" className="w-fit button-brand py-4 px-8">
-          Lihat Semua
-        </Link>
-      </div>
+      {displayedEvents.length === 0 && (
+        <p className="italic text-center text-gray-400">Tidak ada event.</p>
+      )}
+      {displayedEvents.length > 0 && (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-center items-center 2xl:px-16 mb-16">
+            {displayedEvents.map((event) => (
+              <EventCard event={event} key={event.title} />
+            ))}
+          </div>
+          <div className="text-center">
+            <Link href="/events" className="w-fit button-brand py-4 px-8">
+              Lihat Semua
+            </Link>
+          </div>
+        </>
+      )}
     </section>
   );
 };

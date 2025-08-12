@@ -1,10 +1,11 @@
+import { getBeritas } from "@/lib/actions/postActions";
 import Link from "next/link";
-import { blogsData } from "@/db/data-service";
 import PostCard from "../shared/PostCard";
 
-const displayedPosts = blogsData.slice(0, 3);
+const BlogSection = async () => {
+  const blogs = await getBeritas();
+  const displayedBlogs = blogs.slice(0, 3);
 
-const BlogSection = () => {
   return (
     <section className="section">
       <div className="2xl:w-1/2 mb-16">
@@ -19,7 +20,7 @@ const BlogSection = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-center items-center 2xl:px-16 mb-16">
-        {displayedPosts.map((post) => (
+        {displayedBlogs.map((post) => (
           <PostCard post={post} key={post.title} />
         ))}
       </div>

@@ -60,7 +60,7 @@ model VerificationToken {
 
 model Post {
   id        String   @id @default(cuid())
-  category  Category @default(POST)
+  category  String
   title     String
   slug      String   @unique @map("post_slug_idx")
   content   String
@@ -68,11 +68,4 @@ model Post {
   banner    String
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt
-}
-
-// type
-
-enum Category {
-  EVENT
-  POST
 }

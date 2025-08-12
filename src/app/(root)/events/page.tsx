@@ -1,5 +1,5 @@
-import EventCard from "@/components/shared/EventCard";
-import { eventsData } from "@/db/data-service";
+import { Suspense } from "react";
+import EventList from "./EventList";
 
 const Page = () => {
   return (
@@ -17,11 +17,9 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-        {eventsData.map((event) => (
-          <EventCard event={event} key={event.title} />
-        ))}
-      </div>
+      <Suspense fallback={<p>loading...</p>}>
+        <EventList />
+      </Suspense>
     </section>
   );
 };

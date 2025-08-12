@@ -23,9 +23,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import slugify from "slugify";
 import TipTap from "@/components/tiptap/TipTap";
+import { addPostActions } from "@/lib/actions/postActions";
+import { toast } from "sonner";
 
 const initialPost: z.infer<typeof insertPostSchema> = {
-  category: "berita",
+  category: "BERITA",
   title: "",
   slug: "",
   banner: "",
@@ -40,7 +42,14 @@ const CreatePostForm = () => {
   });
 
   const handleCreate = async (values: z.infer<typeof insertPostSchema>) => {
-    console.log(values);
+    const res = await addPostActions(values);
+
+    if (!res.success) {
+      return toast.error(res.message);
+    }
+
+    toast.success(res.message);
+    form.reset();
   };
 
   return (
@@ -62,8 +71,8 @@ const CreatePostForm = () => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="berita">Berita</SelectItem>
-                    <SelectItem value="event">Event</SelectItem>
+                    <SelectItem value="BERITA">Berita</SelectItem>
+                    <SelectItem value="EVENT">Event</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

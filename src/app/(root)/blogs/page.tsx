@@ -1,5 +1,5 @@
-import PostCard from "@/components/shared/PostCard";
-import { blogsData } from "@/db/data-service";
+import { Suspense } from "react";
+import PostList from "./PostList";
 
 const Page = () => {
   return (
@@ -17,11 +17,9 @@ const Page = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-        {blogsData.map((post) => (
-          <PostCard post={post} key={post.title} />
-        ))}
-      </div>
+      <Suspense fallback={<p>loading...</p>}>
+        <PostList />
+      </Suspense>
     </section>
   );
 };

@@ -25,8 +25,8 @@ export const signUpFormSchema = z
   });
 
 export const insertPostSchema = z.object({
-  category: z.enum(["event", "berita"]),
-  title: z.string().min(6, "Title harus diisi."),
+  category: z.string().min(1, "Kategori harus diisi."),
+  title: z.string().min(6, "Judul harus diisi."),
   slug: z.string().min(1, "Slug harus diisi."),
   banner: z.string().min(1, "Banner harus diisi."),
   preview: z
