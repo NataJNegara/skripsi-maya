@@ -59,6 +59,7 @@ const TipTap = (props: TipTapProps) => {
       }),
       Heading.extend({
         levels: [1, 2, 3, 4],
+        // eslint-disable-next-line
         renderHTML({ node, HTMLAttributes }: any) {
           const level = this.options.levels.includes(node.attrs.level)
             ? node.attrs.level
