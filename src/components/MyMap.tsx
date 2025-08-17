@@ -7,6 +7,7 @@ import { LatLngTuple } from "leaflet";
 import L from "leaflet";
 import { MapPin } from "lucide-react";
 
+// eslinet-disable-next-line
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -30,13 +31,11 @@ export default function MyMap() {
 
   return (
     <MapContainer
-      // eslint-disable-next-line
       center={center}
       zoom={14}
       style={{ height: "400px", width: "100%" }}
       className="z-40">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {/* eslint-disable-next-line */}
       <Marker position={center} icon={markerIcon}>
         <Popup>Lokasi di sini</Popup>
       </Marker>
