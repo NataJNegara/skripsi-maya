@@ -34,6 +34,7 @@ export default function MyMap() {
       style={{ height: "400px", width: "100%" }}
       className="z-40">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      {/* @typescript-eslint/no-explicit-any */}
       <Marker position={center} icon={markerIcon}>
         <Popup>Lokasi di sini</Popup>
       </Marker>
