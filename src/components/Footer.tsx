@@ -12,7 +12,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="w-full padding-x bg-brand-foreground text-brand-white">
+    <footer className="w-full padding-x bg-brand text-brand-white">
       <div className="grid sm:grid-cols-[auto_1fr] gap-16 py-10 mb-16">
         <div className="">
           <p className="text-4xl xl:text-5xl uppercase font-mak mb-8">

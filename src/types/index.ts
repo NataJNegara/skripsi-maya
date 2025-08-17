@@ -1,9 +1,18 @@
-import { DefaultSession } from "next-auth";
+export type Destination = {
+  id: string;
+  title: string;
+  slug: string;
+  tag: string;
+  preview: string;
+  textContent1: string;
+  textContent2: string;
+  mainImg: string;
+  destinationImages: string[];
+  coordinate: Coordinate;
+  location: string;
+};
 
-declare module "next-auth" {
-  interface Session {
-    user: {
-      role: string;
-    } & DefaultSession["user"];
-  }
-}
+export type Coordinate = {
+  lat: string;
+  lng: string;
+};

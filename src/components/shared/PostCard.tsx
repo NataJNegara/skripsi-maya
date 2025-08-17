@@ -1,3 +1,4 @@
+import { textShorter } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,15 +7,18 @@ type PostCardProp = {
     title: string;
     slug: string;
     banner: string;
+    category: string;
     preview: string;
     createdAt: Date;
   };
 };
 
 const PostCard = (props: PostCardProp) => {
+  const category = `${props.post.category.toLowerCase()}`;
+
   return (
     <div key={props.post.title}>
-      <Link href={`/blogs/${props.post.slug}`}>
+      <Link href={`/${category}/${props.post.slug}`}>
         <div className="relative w-full h-60 sm:h-72 overflow-hidden mb-4">
           <Image
             src={props.post.banner}
@@ -24,14 +28,14 @@ const PostCard = (props: PostCardProp) => {
           />
         </div>
       </Link>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 md:gap-4">
         <Link
-          href={`/blogs/${props.post.slug}`}
+          href={`/${category}/${props.post.slug}`}
           className="text-xl font-semibold">
           {props.post.title}
         </Link>
-        <p>{props.post.preview}</p>
-        <p className="text-sm text-gray-400">tanggal</p>
+        <p className="text-sm">{textShorter(props.post.preview)}</p>
+        <p className="text-xs text-gray-400">tanggal</p>
       </div>
     </div>
   );

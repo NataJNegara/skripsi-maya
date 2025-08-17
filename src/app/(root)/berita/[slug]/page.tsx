@@ -1,5 +1,6 @@
 import NotFound from "@/app/not-found";
 import { getPostBySlug } from "@/lib/actions/postActions";
+import { formatDateTime } from "@/lib/utils";
 import Image from "next/image";
 
 type PostPageProps = {
@@ -14,13 +15,13 @@ const Page = async ({ params }: PostPageProps) => {
 
   return (
     <section className="page-container">
-      <div className="text-center mb-16">
-        <h2>{berita.title}</h2>
-        <p className="text-xs sm:text-sm font-semibold text-brand-secondary">
-          tanggal
+      <div className="text-center mb-8 md:mb-16 flex flex-col gap-4 md:gap-6">
+        <p className="content-title">{berita.title}</p>
+        <p className="text-xs sm:text-sm font-semibold text-brand-secondary italic">
+          {formatDateTime(berita.createdAt).dateOnly}
         </p>
       </div>
-      <div className="relative w-full h-[500px] mb-16">
+      <div className="relative content-banner-image mb-16">
         <Image
           src={berita.banner}
           alt={`gambar untuk postingan ${berita.title}`}

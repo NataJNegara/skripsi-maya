@@ -8,14 +8,15 @@ import Navigation from "./shared/Navigation";
 
 const navigationLinks = [
   { title: "Destinasi", href: "/destinasi" },
-  { title: "Event", href: "/events" },
-  { title: "Blog", href: "/blogs" },
+  { title: "Event", href: "/event" },
+  { title: "Blog", href: "/berita" },
   { title: "Tentang", href: "/tentang" },
 ];
 
 const Header = () => {
   const [prevScroll, setPrevScroll] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   const navRef = useRef<HTMLDivElement>(null);
@@ -27,12 +28,14 @@ const Header = () => {
       setPrevScroll(currScroll);
 
       if (navRef.current && window.scrollY > 100) {
-        navRef.current.style.backgroundColor = "#fff";
-        navRef.current.style.color = "#31511e";
+        setIsScrolled(true);
+        navRef.current.style.backgroundColor = "#0C2A28";
+        navRef.current.style.color = "#fefae0";
       }
       if (navRef.current && window.scrollY < 100) {
+        setIsScrolled(false);
         navRef.current.style.backgroundColor = "";
-        navRef.current.style.color = "#fff";
+        navRef.current.style.color = "#fefae0";
       }
     };
 
@@ -45,9 +48,9 @@ const Header = () => {
     <div
       ref={navRef}
       className={cn(
-        "fixed w-full padding-x z-50 text-white transition-all duration-300",
+        "fixed w-full padding-x z-50 text-brand transition-all duration-300",
         isVisible ? "" : "-translate-y-full",
-        pathname !== "/" ? "text-brand!" : ""
+        pathname !== "/" && !isScrolled ? "text-brand!" : "text-brand-white"
       )}>
       <div className="h-20 grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center justify-between">
         <Link href="/" className="uppercase text-2xl font-bold font-mak">
