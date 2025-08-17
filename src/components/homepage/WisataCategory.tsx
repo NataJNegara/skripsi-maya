@@ -1,4 +1,4 @@
-import { wisataData } from "@/db/data-service";
+import { wisataType } from "@/db/data-service";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,12 +19,12 @@ const WisataCategory = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 xl:px-10 items-center justify-center">
-        {wisataData.map((wisata) => (
+        {wisataType.map((wisata) => (
           <div
             key={wisata.title}
             className="relative h-[400px] xl:h-[500px]  2xl:h-[600px]  rounded-2xl overflow-hidden hover:[&_img]:scale-105 hover:[&_img]:grayscale-50">
             <Image
-              src={wisata.bgImage}
+              src={wisata.image}
               fill
               alt={`image of wisata ${wisata.title}`}
               className="object-cover transition-all duration-700"

@@ -217,3 +217,36 @@ export const footerSocials = [
   { title: "facebook", href: "/" },
   { title: "youtube", href: "/" },
 ];
+
+export const wisataType = [
+  {
+    title: "Alam",
+    image: "/images/wisata-01.jpg",
+    description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci.`,
+    href: "/destinasi?wisata=alam",
+  },
+  {
+    title: "Buatan",
+    image: "/images/wisata-01.jpg",
+    description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci.`,
+    href: "/destinasi?wisata=buatan",
+  },
+  {
+    title: "Budaya",
+    image: "/images/wisata-01.jpg",
+    description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+              excepturi consequuntur reprehenderit quasi earum magnam asperiores
+              nemo libero adipisci.`,
+    href: "/destinasi?wisata=budaya",
+  },
+];
