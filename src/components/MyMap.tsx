@@ -2,6 +2,7 @@
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import ReactDOMServer from "react-dom/server";
+import { LatLngTuple } from "leaflet";
 
 import L from "leaflet";
 import { MapPin } from "lucide-react";
@@ -14,7 +15,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "/leaflet/marker-shadow.png",
 });
 
-const center: [number, number] = [-3.656097, 103.774133];
+const center: LatLngTuple = [-3.656097, 103.774133];
 
 export default function MyMap() {
   // Build DivIcon with Lucide SVG
@@ -34,7 +35,6 @@ export default function MyMap() {
       style={{ height: "400px", width: "100%" }}
       className="z-40">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {/* @typescript-eslint/no-explicit-any */}
       <Marker position={center} icon={markerIcon}>
         <Popup>Lokasi di sini</Popup>
       </Marker>
