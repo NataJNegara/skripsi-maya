@@ -15,13 +15,15 @@ type AdminPostCardProps = {
 };
 
 const AdminPostCard = ({ post }: AdminPostCardProps) => {
+  const category = post.category.toLowerCase();
+
   return (
     <div className="border grid grid-cols-[1fr_auto]">
       <div className="flex gap-2">
         <Image src={post.banner} alt="contoh gambar" width={150} height={100} />
         <div className="p-2 flex flex-col gap-2 w-full">
           <div>
-            <Link href={`/blogs/${post.slug}`} className="font-semibold">
+            <Link href={`/${category}/${post.slug}`} className="font-semibold">
               {post.title}
             </Link>
             <p className="text-base ">{post.preview}</p>

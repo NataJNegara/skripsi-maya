@@ -32,8 +32,8 @@ export async function addPostActions(data: z.infer<typeof insertPostSchema>) {
     });
 
     revalidatePath("/admin/postingan");
-    revalidatePath("/blog");
-    revalidatePath("/post");
+    revalidatePath("/berita");
+    revalidatePath("/event");
 
     return { success: true, message: "Postingan baru berhasil ditambahkan." };
   } catch (err) {
