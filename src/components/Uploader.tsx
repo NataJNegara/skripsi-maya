@@ -186,28 +186,25 @@ const Uploader = () => {
     }
   };
 
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      // Do something with the files
-      if (acceptedFiles.length) {
-        setFiles((prevFiles) => [
-          ...prevFiles,
-          ...acceptedFiles.map((file) => ({
-            id: uuidv4(),
-            file: file,
-            uploading: false,
-            progress: 0,
-            isDeleting: false,
-            error: false,
-            objectUrl: URL.createObjectURL(file),
-          })),
-        ]);
-      }
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    // Do something with the files
+    if (acceptedFiles.length) {
+      setFiles((prevFiles) => [
+        ...prevFiles,
+        ...acceptedFiles.map((file) => ({
+          id: uuidv4(),
+          file: file,
+          uploading: false,
+          progress: 0,
+          isDeleting: false,
+          error: false,
+          objectUrl: URL.createObjectURL(file),
+        })),
+      ]);
+    }
 
-      acceptedFiles.forEach(uploadFile);
-    },
-    [uploadFile]
-  );
+    acceptedFiles.forEach(uploadFile);
+  }, []);
 
   const onDropRejected = useCallback((fileRejections: FileRejection[]) => {
     // Do something with the files
@@ -255,7 +252,7 @@ const Uploader = () => {
             <p className="text-center">Drop the files here ...</p>
           ) : (
             <div className="flex flex-col gap-6 items-center justify-center">
-              <p>Drag 'n' drop some files here, or click to select files</p>
+              <p>Drag & drop some files here, or click to select files</p>
               <Button type="button" className="cursor-pointer bg-brand-accent">
                 Select file
               </Button>

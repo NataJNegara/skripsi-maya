@@ -72,7 +72,7 @@ const CreateWisataForm = () => {
         filesToStore.map((item) => item.fileUrl)
       );
     }
-  }, [filesToStore]);
+  }, [filesToStore, form]);
 
   const titleValue = form.watch("title");
 
