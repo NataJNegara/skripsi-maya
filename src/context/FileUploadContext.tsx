@@ -45,9 +45,7 @@ function FileUploadProvider({ children }: { children: React.ReactNode }) {
 function useFileUpload() {
   const context = useContext(FileUploadContext);
   if (context === undefined)
-    throw new Error(
-      `file upload provider can't be called outside it's provider`
-    );
+    throw new Error(`file upload provider cant be called outside its provider`);
   return context;
 }
 

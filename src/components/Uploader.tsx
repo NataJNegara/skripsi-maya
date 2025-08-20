@@ -75,6 +75,7 @@ const Uploader = () => {
 
       setFiles((prevFiles) => prevFiles.filter((item) => item.id !== fileId));
     } catch (err) {
+      console.error(err);
       toast.error("Failed to delete file");
 
       setFiles((prevFiles) =>
@@ -171,7 +172,8 @@ const Uploader = () => {
       onUpload({
         fileUrl: `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.${process.env.NEXT_PUBLIC_AWS_ENDPOINT_URL_S3}/${key}`,
       });
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       toast.error("something went wrong");
 
       setFiles((prevFile) =>
@@ -184,25 +186,28 @@ const Uploader = () => {
     }
   };
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    // Do something with the files
-    if (acceptedFiles.length) {
-      setFiles((prevFiles) => [
-        ...prevFiles,
-        ...acceptedFiles.map((file) => ({
-          id: uuidv4(),
-          file: file,
-          uploading: false,
-          progress: 0,
-          isDeleting: false,
-          error: false,
-          objectUrl: URL.createObjectURL(file),
-        })),
-      ]);
-    }
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      // Do something with the files
+      if (acceptedFiles.length) {
+        setFiles((prevFiles) => [
+          ...prevFiles,
+          ...acceptedFiles.map((file) => ({
+            id: uuidv4(),
+            file: file,
+            uploading: false,
+            progress: 0,
+            isDeleting: false,
+            error: false,
+            objectUrl: URL.createObjectURL(file),
+          })),
+        ]);
+      }
 
-    acceptedFiles.forEach(uploadFile);
-  }, []);
+      acceptedFiles.forEach(uploadFile);
+    },
+    [uploadFile]
+  );
 
   const onDropRejected = useCallback((fileRejections: FileRejection[]) => {
     // Do something with the files
