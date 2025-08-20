@@ -3,6 +3,7 @@ import Link from "next/link";
 const sidebarNav = [
   { title: "dashboard", href: "/admin" },
   { title: "postingan", href: "/admin/postingan" },
+  { title: "wisata", href: "/admin/wisata" },
 ];
 
 const AdminSidebar = () => {

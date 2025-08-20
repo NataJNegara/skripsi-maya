@@ -209,4 +209,10 @@ input {
   .content-banner-image {
     @apply w-full h-[280px] md:h-[400px] 2xl:h-[500px];
   }
+
+  /* BUTTON */
+  .button-small {
+    @apply cursor-pointer w-24 h-full bg-brand! hover:bg-brand-secondary! text-brand-white;
+  }
+  /* END OF BUTTON */
 }

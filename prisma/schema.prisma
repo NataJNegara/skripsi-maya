@@ -69,3 +69,16 @@ model Post {
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt
 }
+
+model Destination {
+  id                String   @id @default(cuid())
+  title             String
+  slug              String   @unique @map("destination_slug_idx")
+  tag               String
+  preview           String
+  content           String
+  bannerImg         String
+  destinationImages String[]
+  coordinate        Json
+  location          String
+}

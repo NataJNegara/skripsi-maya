@@ -1,4 +1,4 @@
-import { destinasiData } from "@/db/data-service";
+import { getDestinationBySlug } from "@/lib/actions/destinationActions";
 import { notFound } from "next/navigation";
 import DestinationDetails from "./DestinationDetails";
 
@@ -8,7 +8,7 @@ type DestinationDetailProps = {
 
 const Page = async ({ params }: DestinationDetailProps) => {
   const { slug } = await params;
-  const destination = destinasiData.find((data) => data.slug === slug);
+  const destination = await getDestinationBySlug(slug);
   // console.log(destination);
 
   if (!destination) return notFound();

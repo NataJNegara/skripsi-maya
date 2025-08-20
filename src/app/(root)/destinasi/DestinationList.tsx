@@ -1,11 +1,15 @@
-import Destination from "./Destination";
-import { destinasiData } from "@/db/data-service";
+import { getDestinations } from "@/lib/actions/destinationActions";
+import Destination from "./DestinationCard";
 
 const DestinationList = async () => {
+  const destinations = await getDestinations();
+
+  if (!destinations) return <p>Belum ada destinasi</p>;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8">
-      {destinasiData.map((destinasi) => (
-        <Destination destination={destinasi} key={destinasi.slug} />
+      {destinations.map((destination) => (
+        <Destination destination={destination} key={destination.slug} />
       ))}
     </div>
   );

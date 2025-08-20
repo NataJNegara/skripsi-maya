@@ -8,19 +8,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Destination } from "@/types";
+import { Coordinate, Destination } from "@/types";
 import { BookmarkPlus, MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
-
-type DestinationDetailsProps = {
-  destination: Destination;
-};
 
 const MyMap = dynamic(() => import("@/components/MyMap"), {
   ssr: false,
 });
 
-const DestinationDetails = ({ destination }: DestinationDetailsProps) => {
+const DestinationDetails = ({ destination }: { destination: Destination }) => {
   return (
     <div>
       <div className="grid gap-8 grid-cols-1 md:grid-cols-[4fr_1fr]">
@@ -66,7 +62,7 @@ const DestinationDetails = ({ destination }: DestinationDetailsProps) => {
       <div className="margin-horizontal">
         <div>
           <p className="text-xl font-semibold mb-8">Deskripsi</p>
-          <p className="xl:text-lg">{destination.textContent1}</p>
+          <p className="xl:text-lg">{destination.content}</p>
         </div>
         {/* end of content */}
       </div>
@@ -75,7 +71,7 @@ const DestinationDetails = ({ destination }: DestinationDetailsProps) => {
       <div className="margin-horizontal">
         <p className="text-xl font-semibold mb-8">Lokasi</p>
         <div className="border-1 border-brand-accent!">
-          <MyMap />
+          <MyMap coordinate={destination.coordinate as Coordinate} />
         </div>
       </div>
       {/* end of map */}

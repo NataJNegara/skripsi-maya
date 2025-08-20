@@ -1,23 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import { cn, textShorter } from "@/lib/utils";
+import { Destination as DestinationType } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-type DestinationProp = {
-  destination: {
-    title: string;
-    slug: string;
-    tag: string;
-    preview: string;
-    mainImg: string;
-  };
-};
-
-const Destination = ({ destination }: DestinationProp) => {
+const Destination = ({ destination }: { destination: DestinationType }) => {
   let wisataType;
-  if (destination.tag === "alam") {
+  if (destination.tag.toLowerCase() === "alam") {
     wisataType = "bg-brand text-brand-white";
-  } else if (destination.tag === "buatan") {
+  } else if (destination.tag.toLowerCase() === "buatan") {
     wisataType = "bg-brand-white text-brand";
   } else {
     wisataType = "bg-brand-accent text-brand-white";
@@ -28,14 +19,16 @@ const Destination = ({ destination }: DestinationProp) => {
       href={`/destinasi/${destination.slug}`}
       className="relative aspect-video overflow-hidden">
       <Image
-        src={destination.mainImg}
+        src={destination.bannerImg}
         alt={`image of ${destination.title}`}
         fill
+        priority
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover hover:scale-110 hover:brightness-75 transition-all duration-500"
       />
       <div className="absolute bottom-0 p-4">
         <Badge className={cn("bg-brand capitalize ", wisataType)}>
-          {destination.tag}
+          {destination.tag.toLocaleLowerCase()}
         </Badge>
         <div className="text-brand-white">
           <p className="text-lg xl:text-2xl font-semibold capitalize">

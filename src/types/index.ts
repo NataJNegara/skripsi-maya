@@ -1,18 +1,17 @@
-export type Destination = {
+import { insertDestinationSchema } from "@/lib/validator";
+import { Prisma } from "@prisma/client";
+import { z } from "zod";
+
+// TODO: INFER TYPE FROM VALIDATOR
+export type Destination = Omit<
+  z.infer<typeof insertDestinationSchema>,
+  "coordinate"
+> & {
   id: string;
-  title: string;
-  slug: string;
-  tag: string;
-  preview: string;
-  textContent1: string;
-  textContent2: string;
-  mainImg: string;
-  destinationImages: string[];
-  coordinate: Coordinate;
-  location: string;
+  coordinate: Prisma.JsonValue;
 };
 
 export type Coordinate = {
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
 };

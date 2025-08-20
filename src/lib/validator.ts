@@ -35,3 +35,25 @@ export const insertPostSchema = z.object({
     .max(150, "Preview tidak boleh lebih dari 150 karakter"),
   content: z.string().min(6, "Konten tarlalu singkat."),
 });
+
+export const coordinateSchema = z.object({
+  lat: z.string().min(1, "latitude harus diisi."),
+  lng: z.string().min(1, "longitude harus diisi."),
+});
+
+export const insertDestinationSchema = z.object({
+  title: z.string().min(6, "Judul harus diisi."),
+  slug: z.string().min(1, "Slug harus diisi."),
+  tag: z.string().min(1, "Kategori harus diisi."),
+  preview: z
+    .string()
+    .min(10, "Tuliskan preview yang sesuai.")
+    .max(150, "Preview tidak boleh lebih dari 150 karakter"),
+  content: z.string().min(6, "Konten tarlalu singkat."),
+  bannerImg: z.string().min(1, "Banner harus diisi"),
+  destinationImages: z
+    .array(z.string())
+    .min(1, "Destinasi wisata harus memiliki setidaknya 1 gambar"),
+  coordinate: coordinateSchema,
+  location: z.string().min(1, "Alamat atau lokasi wisata harus diisi."),
+});

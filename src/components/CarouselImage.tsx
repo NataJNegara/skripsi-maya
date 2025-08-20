@@ -12,6 +12,8 @@ const CarouselImage = ({ imgSrc, imgAlt }: CarouselImageProp) => {
       <Image
         src={imgSrc}
         alt={imgAlt}
+        priority
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="h-full w-full object-cover rounded-xl"
         fill
       />
