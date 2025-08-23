@@ -120,6 +120,7 @@ export async function getDestinationsAdmin({
       ...searchFilter,
     },
     orderBy: { createdAt: "desc" },
+    skip: (page - 1) * limit,
   });
 
   const totalData = await prisma.destination.count({
