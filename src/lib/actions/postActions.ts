@@ -73,22 +73,26 @@ export async function getPosts({
   const categoryFilter: Prisma.PostWhereInput =
     category !== "SEMUA" && category?.length !== 0 ? { category } : {};
 
-  const posts = await prisma.post.findMany({
-    where: {
-      ...categoryFilter,
-      ...searchFilter,
-    },
-    orderBy: { createdAt: "desc" },
-    take: limit,
-    skip: (page - 1) * limit,
-  });
+  const [posts, totalData] = await Promise.all([
+    // get posts
+    await prisma.post.findMany({
+      where: {
+        ...categoryFilter,
+        ...searchFilter,
+      },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+      skip: (page - 1) * limit,
+    }),
 
-  const totalData = await prisma.post.count({
-    where: {
-      ...categoryFilter,
-      ...searchFilter,
-    },
-  });
+    // post count
+    await prisma.post.count({
+      where: {
+        ...categoryFilter,
+        ...searchFilter,
+      },
+    }),
+  ]);
 
   return { posts, totalData, pageCount: Math.ceil(totalData / limit) };
 }
