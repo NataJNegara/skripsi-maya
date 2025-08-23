@@ -1,8 +1,6 @@
 import SearchBar from "@/components/SearchBar";
 import Spinner from "@/components/Spinner";
 import Filter from "@/components/shared/Filter";
-import Pagination from "@/components/shared/Pagination";
-import { getPosts } from "@/lib/actions/postActions";
 import { CirclePlus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -22,12 +20,6 @@ const Page = async ({ searchParams }: PostPageProps) => {
     category = "SEMUA",
     searchQuery = "",
   } = await searchParams;
-
-  const { posts, totalData, pageCount } = await getPosts({
-    page: Number(page),
-    category,
-    searchQuery,
-  });
 
   return (
     <div className="">
@@ -69,16 +61,10 @@ const Page = async ({ searchParams }: PostPageProps) => {
         </p>
       )}
 
-      <p className="text-sm italic my-8">
-        menampilkan {posts.length} dari {totalData} postingan.
-      </p>
-
       {/* table of content */}
       <Suspense fallback={<Spinner />}>
-        <PostList posts={posts} />
+        <PostList page={page} category={category} searchQuery={searchQuery} />
       </Suspense>
-
-      {pageCount > 1 && <Pagination page={page} totalPages={pageCount} />}
     </div>
   );
 };
