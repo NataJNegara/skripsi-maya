@@ -1,10 +1,15 @@
 import { getDestinations } from "@/lib/actions/destinationActions";
 import Destination from "./DestinationCard";
 
-const DestinationList = async () => {
-  const destinations = await getDestinations();
+const DestinationList = async ({ filterTag }: { filterTag: string }) => {
+  const destinations = await getDestinations({ tag: filterTag });
 
-  if (!destinations) return <p>Belum ada destinasi</p>;
+  if (destinations === null || destinations.length === 0)
+    return (
+      <p className="text-center italic font-semibold text-brand/50">
+        Belum ada destinasi
+      </p>
+    );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 xl:gap-8">

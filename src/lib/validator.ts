@@ -48,7 +48,7 @@ export const insertDestinationSchema = z.object({
   preview: z
     .string()
     .min(10, "Tuliskan preview yang sesuai.")
-    .max(150, "Preview tidak boleh lebih dari 150 karakter"),
+    .max(250, "Preview tidak boleh lebih dari 150 karakter"),
   content: z.string().min(6, "Konten tarlalu singkat."),
   bannerImg: z.string().min(1, "Banner harus diisi"),
   destinationImages: z

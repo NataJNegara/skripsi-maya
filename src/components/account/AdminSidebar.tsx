@@ -20,7 +20,7 @@ const AdminSidebar = () => {
           </li>
         ))}
 
-        <li className="mt-auto mb-16">
+        <li className="mt-64">
           <button className="py-3 px-6 font-semibold hover:bg-brand-secondary hover:text-white cursor-pointer w-full text-left">
             Logout
           </button>

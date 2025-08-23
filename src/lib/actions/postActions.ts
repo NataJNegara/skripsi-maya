@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { auth } from "../auth";
 import { insertPostSchema } from "../validator";
+import { PAGE_SIZE } from "../constant";
+import { Prisma } from "@prisma/client";
 
 // ===================================================================================CREATE POST
 export async function addPostActions(data: z.infer<typeof insertPostSchema>) {
@@ -48,9 +50,47 @@ export async function addPostActions(data: z.infer<typeof insertPostSchema>) {
 
 // ==============================================================GET POSTS(ALL)
 
-export async function getPosts() {
-  const posts = await prisma.post.findMany({ orderBy: { createdAt: "desc" } });
-  return posts;
+type GetPostType = {
+  page: number;
+  limit?: number;
+  searchQuery?: string;
+  category?: string;
+};
+
+export async function getPosts({
+  page,
+  limit = PAGE_SIZE,
+  searchQuery,
+  category,
+}: GetPostType) {
+  const searchFilter: Prisma.PostWhereInput =
+    searchQuery && searchQuery.trim().length > 0
+      ? {
+          OR: [{ title: { contains: searchQuery, mode: "insensitive" } }],
+        }
+      : {};
+
+  const categoryFilter: Prisma.PostWhereInput =
+    category !== "SEMUA" && category?.length !== 0 ? { category } : {};
+
+  const posts = await prisma.post.findMany({
+    where: {
+      ...categoryFilter,
+      ...searchFilter,
+    },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    skip: (page - 1) * limit,
+  });
+
+  const totalData = await prisma.post.count({
+    where: {
+      ...categoryFilter,
+      ...searchFilter,
+    },
+  });
+
+  return { posts, totalData, pageCount: Math.ceil(totalData / limit) };
 }
 
 // ==============================================================GET POSTS(BERITA)
@@ -80,4 +120,45 @@ export async function getEvents() {
   });
 
   return events;
+}
+
+// ==============================================================DELETE POST BY ID
+export async function deletePostAction(id: string) {
+  try {
+    const session = await auth();
+    if (!session) {
+      throw new Error("Sesi tidak ditemukan");
+    }
+
+    if (session.user.role !== "ADMIN") {
+      throw new Error("Sesi tidak valid");
+    }
+
+    const post = await prisma.post.findFirst({
+      where: { id },
+    });
+
+    if (!post) {
+      throw new Error("Post tidak ditemukan");
+    }
+
+    await prisma.post.delete({
+      where: { id },
+    });
+
+    revalidatePath("/admin/postingan");
+    revalidatePath("/event");
+    revalidatePath("/berita");
+
+    return {
+      success: true,
+      message: "Postingan berhasil dihapus.",
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      success: false,
+      message: "Ooppss... terjadi kesalahan, coba lagi nanti.",
+    };
+  }
 }

@@ -62,7 +62,11 @@ const DestinationDetails = ({ destination }: { destination: Destination }) => {
       <div className="margin-horizontal">
         <div>
           <p className="text-xl font-semibold mb-8">Deskripsi</p>
-          <p className="xl:text-lg">{destination.content}</p>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: destination.content as TrustedHTML,
+            }}
+          />
         </div>
         {/* end of content */}
       </div>

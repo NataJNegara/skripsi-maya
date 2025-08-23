@@ -1,4 +1,4 @@
-import { insertDestinationSchema } from "@/lib/validator";
+import { insertDestinationSchema, insertPostSchema } from "@/lib/validator";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 
@@ -14,4 +14,10 @@ export type Destination = Omit<
 export type Coordinate = {
   lat: number;
   lng: number;
+};
+
+export type Post = z.infer<typeof insertPostSchema> & {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
 };

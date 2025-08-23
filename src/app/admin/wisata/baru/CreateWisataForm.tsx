@@ -1,6 +1,7 @@
 "use client";
 
 import Uploader from "@/components/Uploader";
+import TipTap from "@/components/tiptap/TipTap";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -18,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { useFileUpload } from "@/context/FileUploadContext";
 import { createDestinationAction } from "@/lib/actions/destinationActions";
 import { insertDestinationSchema } from "@/lib/validator";
@@ -151,31 +153,35 @@ const CreateWisataForm = () => {
             <FormItem>
               <FormLabel>Preview</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="Konten preview" {...field} />
+                <Textarea
+                  placeholder="Tulis preview konten..."
+                  className="resize-none"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
+        <div className="flex flex-col gap-2">
+          <p className="font-semibold text-sm">Gambar Wisata</p>
+          <Uploader />
+        </div>
+
         {/* <FormField
           control={form.control}
-          name="bannerImg"
+          name="content"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Banner</FormLabel>
+              <FormLabel>Konten</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="banner" {...field} />
+                <Input type="text" placeholder="Konten" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         /> */}
-
-        <div className="flex flex-col gap-2">
-          <p className="font-semibold text-sm">Gambar Wisata</p>
-          <Uploader />
-        </div>
 
         <FormField
           control={form.control}
@@ -184,7 +190,7 @@ const CreateWisataForm = () => {
             <FormItem>
               <FormLabel>Konten</FormLabel>
               <FormControl>
-                <Input type="text" placeholder="Konten" {...field} />
+                <TipTap description={field.name} onChange={field.onChange} />
               </FormControl>
               <FormMessage />
             </FormItem>

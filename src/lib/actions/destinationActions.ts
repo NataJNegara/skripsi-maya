@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { auth } from "../auth";
 import { insertDestinationSchema } from "../validator";
+import { Prisma } from "@prisma/client";
 
 // =========================CREATE
 export async function createDestinationAction(
@@ -55,8 +56,16 @@ export async function createDestinationAction(
 }
 
 // =========================GET ALL
-export async function getDestinations() {
-  const destinations = await prisma.destination.findMany();
+export async function getDestinations({ tag }: { tag?: string }) {
+  // filter wisata by its tag
+  const wisataFilter: Prisma.DestinationWhereInput =
+    tag !== "SEMUA" && tag?.length !== 0 ? { tag } : {};
+
+  const destinations = await prisma.destination.findMany({
+    where: {
+      ...wisataFilter,
+    },
+  });
 
   if (!destinations) return null;
 

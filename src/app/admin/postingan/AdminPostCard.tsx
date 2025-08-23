@@ -1,29 +1,31 @@
+import DeleteDialog from "@/components/shared/DeleteDialog";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { deletePostAction } from "@/lib/actions/postActions";
+import { cn, formatDateTime } from "@/lib/utils";
+import { Post } from "@/types";
+import { SquarePen, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-type AdminPostCardProps = {
-  post: {
-    category: string;
-    title: string;
-    slug: string;
-    banner: string;
-    preview: string;
-    content: string;
-  };
-};
-
-const AdminPostCard = ({ post }: AdminPostCardProps) => {
+const AdminPostCard = ({ post }: { post: Post }) => {
   const category = post.category.toLowerCase();
 
   return (
     <div className="border grid grid-cols-[1fr_auto]">
       <div className="flex gap-2">
-        <Image src={post.banner} alt="contoh gambar" width={150} height={100} />
+        <div className="relative w-[150px] h-[100px]">
+          <Image
+            src={post.banner}
+            alt="contoh gambar"
+            fill
+            className="object-cover"
+          />
+        </div>
         <div className="p-2 flex flex-col gap-2 w-full">
           <div>
-            <Link href={`/${category}/${post.slug}`} className="font-semibold">
+            <Link
+              href={`/${category}/${post.slug}`}
+              className="font-semibold capitalize">
               {post.title}
             </Link>
             <p className="text-base ">{post.preview}</p>
@@ -38,17 +40,19 @@ const AdminPostCard = ({ post }: AdminPostCardProps) => {
               )}>
               {post.category.toLocaleLowerCase()}
             </p>
-            <p className="text-xs px-4 italic text-gray-500">tanggal</p>
+            <p className="text-xs px-4 italic text-gray-500">
+              {formatDateTime(post.createdAt).dateTime}
+            </p>
           </div>
         </div>
       </div>
       <div className="w-fit border-l">
-        <Button className="w-full h-1/2 bg-transparent hover:bg-gray-200 text-gray-800 cursor-pointer transition-all duration-300">
-          Ubah
+        <Button className="flex items-center gap-2 w-full h-1/2 bg-transparent hover:bg-gray-200 text-gray-800 cursor-pointer transition-all duration-300">
+          <SquarePen />
+          <span>Ubah</span>
         </Button>
-        <Button className="w-full h-1/2 bg-transparent hover:bg-red-500 text-gray-800 hover:text-red-50 cursor-pointer transition-all duration-300">
-          Hapus
-        </Button>
+
+        <DeleteDialog id={post.id} action={deletePostAction} />
       </div>
     </div>
   );

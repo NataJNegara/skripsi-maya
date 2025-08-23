@@ -14,7 +14,7 @@ export default function RootLayout({
       <div
         className={`grid grid-cols-1 xl:grid-cols-[16rem_auto] h-full min-h-screen  pt-32 px-20`}>
         <AdminSidebar />
-        <div className="px-6">
+        <div className="px-6 margin-bottom">
           <FileUploadProvider>{children}</FileUploadProvider>
         </div>
       </div>

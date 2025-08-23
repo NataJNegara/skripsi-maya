@@ -4,28 +4,32 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
-const Filter = () => {
+type FilterProps = {
+  filterField: string;
+  options: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
+const Filter = ({ filterField, options }: FilterProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const activeFilter = searchParams.get("wisata") ?? "semua";
-
-  const queryFilter = [
-    { title: "Semua", value: "semua" },
-    { title: "Alam", value: "alam" },
-    { title: "Buatan", value: "buatan" },
-    { title: "Budaya", value: "budaya" },
-  ];
+  const activeFilter = searchParams.get(filterField) ?? "semua";
 
   const handleFilter = (filter: string) => {
     const params = new URLSearchParams(searchParams);
-    params.set("wisata", filter);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    params.set("page", "1");
+    params.set(filterField, filter);
+    router.replace(`${pathname}?${params.toString()}`, {
+      scroll: false,
+    });
   };
 
   return (
-    <div className="flex gap-2 md:gap-4">
-      {queryFilter.map((filter) => (
+    <div className="flex gap-2">
+      {options.map((filter) => (
         <Button
           onClick={() => handleFilter(filter.value)}
           className={cn(
@@ -33,7 +37,7 @@ const Filter = () => {
             activeFilter === filter.value && "bg-brand text-brand-white-alt"
           )}
           key={filter.value}>
-          {filter.title}
+          {filter.label}
         </Button>
       ))}
     </div>

@@ -3,7 +3,13 @@ import DestinationList from "./DestinationList";
 import { Suspense } from "react";
 import Spinner from "@/components/Spinner";
 
-const Page = () => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag: string }>;
+}) => {
+  const { tag = "SEMUA" } = await searchParams;
+
   return (
     <div className="page-container">
       <div className="w-fit mx-auto flex flex-col justify-center mb-8">
@@ -23,11 +29,19 @@ const Page = () => {
       </p>
 
       <div className="flex justify-center my-16">
-        <Filter />
+        <Filter
+          filterField="tag"
+          options={[
+            { label: "Semua", value: "SEMUA" },
+            { label: "Alam", value: "ALAM" },
+            { label: "Buatan", value: "BUATAN" },
+            { label: "Budaya", value: "BUDAYA" },
+          ]}
+        />
       </div>
 
       <Suspense fallback={<Spinner />}>
-        <DestinationList />
+        <DestinationList filterTag={tag} />
       </Suspense>
     </div>
   );
