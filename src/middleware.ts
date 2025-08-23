@@ -48,7 +48,7 @@ function getDefaultRoute(role: string) {
   switch (role) {
     case "ADMIN":
       return "/admin";
-    case "user":
+    case "USER":
       return "/user";
     default:
       return "/";

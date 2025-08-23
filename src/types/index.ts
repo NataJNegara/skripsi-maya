@@ -9,6 +9,8 @@ export type Destination = Omit<
 > & {
   id: string;
   coordinate: Prisma.JsonValue;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type Coordinate = {

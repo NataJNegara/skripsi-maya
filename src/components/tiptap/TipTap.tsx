@@ -162,7 +162,7 @@ const TipTap = (props: TipTapProps) => {
         },
       }),
     ],
-    // content: props.description,
+    content: props.description,
     editorProps: {
       attributes: {
         class:

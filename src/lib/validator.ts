@@ -36,6 +36,10 @@ export const insertPostSchema = z.object({
   content: z.string().min(6, "Konten tarlalu singkat."),
 });
 
+export const updatePostSchema = insertPostSchema.extend({
+  id: z.string().min(1, "Id wajib diisi."),
+});
+
 export const coordinateSchema = z.object({
   lat: z.string().min(1, "latitude harus diisi."),
   lng: z.string().min(1, "longitude harus diisi."),

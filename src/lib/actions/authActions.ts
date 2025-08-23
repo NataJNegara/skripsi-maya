@@ -4,7 +4,7 @@ import { prisma } from "@/db/prisma";
 import { signInFormSchema, signUpFormSchema } from "@/lib/validator";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { signIn } from "../auth";
+import { signIn, signOut } from "../auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 
 // =====================================SIGNUP
@@ -74,4 +74,9 @@ export async function signInWithCredential(
       message: "Email atau password salah.",
     };
   }
+}
+
+// =====================================LOG OUT
+export async function logoutAction() {
+  await signOut({ redirectTo: "/" });
 }

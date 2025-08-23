@@ -1,5 +1,6 @@
 "use client";
 
+import TipTap from "@/components/tiptap/TipTap";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,34 +18,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { insertPostSchema } from "@/lib/validator";
+import { updatePostAction } from "@/lib/actions/postActions";
+import { updatePostSchema } from "@/lib/validator";
+import { Post } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import slugify from "slugify";
-import TipTap from "@/components/tiptap/TipTap";
-import { addPostActions } from "@/lib/actions/postActions";
-import { toast } from "sonner";
-import { redirect } from "next/navigation";
 import { Loader } from "lucide-react";
+import { redirect } from "next/navigation";
+import { useForm } from "react-hook-form";
+import slugify from "slugify";
+import { toast } from "sonner";
+import { z } from "zod";
 
-const initialPost: z.infer<typeof insertPostSchema> = {
-  category: "BERITA",
-  title: "",
-  slug: "",
-  banner: "",
-  preview: "",
-  content: "",
-};
-
-const CreatePostForm = () => {
-  const form = useForm<z.infer<typeof insertPostSchema>>({
-    resolver: zodResolver(insertPostSchema),
-    defaultValues: initialPost,
+const UpdatePostForm = ({ post }: { post: Post }) => {
+  const form = useForm<z.infer<typeof updatePostSchema>>({
+    resolver: zodResolver(updatePostSchema),
+    defaultValues: post,
   });
 
-  const handleCreate = async (values: z.infer<typeof insertPostSchema>) => {
-    const res = await addPostActions(values);
+  const handleCreate = async (values: z.infer<typeof updatePostSchema>) => {
+    const res = await updatePostAction(values);
 
     if (!res.success) {
       return toast.error(res.message);
@@ -167,7 +159,7 @@ const CreatePostForm = () => {
               <FormItem>
                 <FormLabel>Konten</FormLabel>
                 <FormControl>
-                  <TipTap description={field.name} onChange={field.onChange} />
+                  <TipTap description={field.value} onChange={field.onChange} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -192,4 +184,4 @@ const CreatePostForm = () => {
   );
 };
 
-export default CreatePostForm;
+export default UpdatePostForm;

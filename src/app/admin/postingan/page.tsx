@@ -30,7 +30,7 @@ const Page = async ({ searchParams }: PostPageProps) => {
             href="/admin/postingan/baru"
             className="bg-brand-accent hover:bg-orange-700 transition-all duration-300 px-4 py-2 text-indigo-50 flex items-center gap-2">
             <span>Postingan baru</span>
-            <CirclePlus />
+            <CirclePlus size={20} />
           </Link>
         </div>
       </div>

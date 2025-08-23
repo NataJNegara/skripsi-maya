@@ -3,10 +3,8 @@ import CreateWisataForm from "./CreateWisataForm";
 const Page = () => {
   return (
     <div className="">
-      <p>Buat Wisata</p>
-      <div className="my-16">
-        <CreateWisataForm />
-      </div>
+      <p className="dashboard-title mb-16">Buat postingan baru</p>
+      <CreateWisataForm />
     </div>
   );
 };

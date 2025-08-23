@@ -1,9 +1,15 @@
 import Link from "next/link";
+import SignOutButton from "../SignOutButton";
+import { LayoutDashboard, MountainSnow, Newspaper } from "lucide-react";
 
 const sidebarNav = [
-  { title: "dashboard", href: "/admin" },
-  { title: "postingan", href: "/admin/postingan" },
-  { title: "wisata", href: "/admin/wisata" },
+  { title: "dashboard", href: "/admin", icon: <LayoutDashboard size={20} /> },
+  {
+    title: "postingan",
+    href: "/admin/postingan",
+    icon: <Newspaper size={20} />,
+  },
+  { title: "wisata", href: "/admin/wisata", icon: <MountainSnow size={20} /> },
 ];
 
 const AdminSidebar = () => {
@@ -14,16 +20,15 @@ const AdminSidebar = () => {
           <li key={item.title}>
             <Link
               href={item.href}
-              className="block px-6 py-3 capitalize font-semibold hover:bg-brand-secondary hover:text-white">
+              className="flex gap-4 items-center px-6 py-3 capitalize font-semibold hover:bg-brand-secondary hover:text-white">
+              {item.icon}
               {item.title}
             </Link>
           </li>
         ))}
 
         <li className="mt-64">
-          <button className="py-3 px-6 font-semibold hover:bg-brand-secondary hover:text-white cursor-pointer w-full text-left">
-            Logout
-          </button>
+          <SignOutButton />
         </li>
       </ul>
     </nav>

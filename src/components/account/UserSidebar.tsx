@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SignOutButton from "../SignOutButton";
 
 const userSidebarLinks = [
   { title: "Dashboard", href: "/user" },
@@ -20,10 +21,8 @@ const UserSidebar = () => {
           </li>
         ))}
 
-        <li className="mt-auto mb-16">
-          <button className="py-3 px-6 font-semibold hover:bg-brand-secondary hover:text-white cursor-pointer w-full text-left">
-            Logout
-          </button>
+        <li className="mt-64">
+          <SignOutButton />
         </li>
       </ul>
     </nav>

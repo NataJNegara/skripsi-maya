@@ -1,13 +1,16 @@
 "use server";
 
 import { prisma } from "@/db/prisma";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { Prisma } from "@prisma/client";
+import {
+  unstable_cacheTag as cacheTag,
+  revalidatePath,
+  revalidateTag,
+} from "next/cache";
 import { z } from "zod";
 import { auth } from "../auth";
-import { insertPostSchema } from "../validator";
 import { PAGE_SIZE } from "../constant";
-import { Prisma } from "@prisma/client";
-import { unstable_cacheTag as cacheTag } from "next/cache";
+import { insertPostSchema, updatePostSchema } from "../validator";
 
 // ===================================================================================CREATE POST
 export async function addPostActions(data: z.infer<typeof insertPostSchema>) {
@@ -19,7 +22,7 @@ export async function addPostActions(data: z.infer<typeof insertPostSchema>) {
       where: { id: session.user.id },
     });
 
-    if (!user) throw new Error("Sesi tidak valid!");
+    if (!user || user.role !== "ADMIN") throw new Error("Sesi tidak valid!");
 
     const validatedData = insertPostSchema.parse(data);
 
@@ -169,6 +172,46 @@ export async function deletePostAction(id: string) {
     return {
       success: false,
       message: "Ooppss... terjadi kesalahan, coba lagi nanti.",
+    };
+  }
+}
+
+// ===================================================================================UPDATE POST
+export async function updatePostAction(data: z.infer<typeof updatePostSchema>) {
+  try {
+    const session = await auth();
+    if (!session) throw new Error("Sesi tidak ditemukan!");
+
+    const user = await prisma.user.findFirst({
+      where: { id: session.user.id },
+    });
+
+    if (!user || user.role !== "ADMIN") throw new Error("Sesi tidak valid!");
+
+    const validatedData = updatePostSchema.parse(data);
+
+    const post = await prisma.post.findFirst({
+      where: { id: validatedData.id },
+    });
+
+    if (!post) throw new Error("Postingan tidak ditemukan.");
+
+    await prisma.post.update({
+      where: { id: validatedData.id },
+      data: validatedData,
+    });
+
+    revalidatePath("/admin/postingan");
+    revalidatePath("/berita");
+    revalidatePath("/event");
+
+    return { success: true, message: "Postingan berhasil diperbarui." };
+  } catch (err) {
+    console.log(err);
+
+    return {
+      success: false,
+      message: "Gagal memperbarui postingan. Coba lagi nanti.",
     };
   }
 }

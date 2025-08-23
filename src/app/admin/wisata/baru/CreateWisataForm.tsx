@@ -252,7 +252,7 @@ const CreateWisataForm = () => {
         <div className="flex justify-end">
           <Button
             type="submit"
-            className="button-small"
+            className="cursor-pointer button-small bg-brand! hover:bg-brand-secondary!"
             disabled={form.formState.isSubmitting}>
             {form.formState.isSubmitting ? (
               <Loader className="animate-spin" />
