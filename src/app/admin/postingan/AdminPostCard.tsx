@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { deletePostAction } from "@/lib/actions/postActions";
 import { cn, formatDateTime } from "@/lib/utils";
 import { Post } from "@/types";
-import { SquarePen, Trash } from "lucide-react";
+import { SquarePen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
