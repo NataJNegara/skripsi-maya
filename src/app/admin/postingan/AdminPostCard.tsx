@@ -17,6 +17,7 @@ const AdminPostCard = ({ post }: { post: Post }) => {
           <Image
             src={post.banner}
             alt="contoh gambar"
+            quality={50}
             fill
             className="object-cover"
           />

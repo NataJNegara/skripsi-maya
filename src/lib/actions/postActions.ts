@@ -1,12 +1,13 @@
 "use server";
 
 import { prisma } from "@/db/prisma";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { z } from "zod";
 import { auth } from "../auth";
 import { insertPostSchema } from "../validator";
 import { PAGE_SIZE } from "../constant";
 import { Prisma } from "@prisma/client";
+import { unstable_cacheTag as cacheTag } from "next/cache";
 
 // ===================================================================================CREATE POST
 export async function addPostActions(data: z.infer<typeof insertPostSchema>) {
@@ -63,6 +64,10 @@ export async function getPosts({
   searchQuery,
   category,
 }: GetPostType) {
+  // cache
+  "use cache";
+  cacheTag("posts-data");
+
   const searchFilter: Prisma.PostWhereInput =
     searchQuery && searchQuery.trim().length > 0
       ? {
@@ -150,6 +155,7 @@ export async function deletePostAction(id: string) {
       where: { id },
     });
 
+    revalidateTag("posts-data");
     revalidatePath("/admin/postingan");
     revalidatePath("/event");
     revalidatePath("/berita");
