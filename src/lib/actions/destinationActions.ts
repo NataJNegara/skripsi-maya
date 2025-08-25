@@ -4,9 +4,10 @@ import { prisma } from "@/db/prisma";
 import { revalidatePath, unstable_cacheTag as cacheTag } from "next/cache";
 import { z } from "zod";
 import { auth } from "../auth";
-import { insertDestinationSchema } from "../validator";
+import { insertDestinationSchema, updateDestinationSchema } from "../validator";
 import { Prisma } from "@prisma/client";
-import { PAGE_SIZE } from "../constant";
+import { BASE_URL, PAGE_SIZE } from "../constant";
+import { redirect } from "next/navigation";
 
 // =========================CREATE
 export async function createDestinationAction(
@@ -158,6 +159,24 @@ export async function deleteDestinationById(id: string) {
       throw new Error("Wisata tidak ditemukan");
     }
 
+    // DELETE IMAGE FROM S3 BUCKET(TIGRIS)
+    const deleteImages = async (fileUrl: string) => {
+      const imageKey = fileUrl.split("/")[3];
+
+      const res = await fetch(`${BASE_URL}/api/s3/delete`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          key: imageKey,
+        }),
+      });
+
+      if (!res.ok) throw new Error("failed to delete image");
+      console.log(`image ${imageKey} deleted`);
+    };
+
+    destination.destinationImages.map((item) => deleteImages(item));
+
     await prisma.destination.delete({
       where: { id },
     });
@@ -175,6 +194,61 @@ export async function deleteDestinationById(id: string) {
     return {
       success: false,
       message: "Ooppss, terjadi kesalahan. coba lagi nanti",
+    };
+  }
+}
+
+// =========================UPDATE DESTINATIONS
+export async function updateDestinationAction(
+  data: z.infer<typeof updateDestinationSchema>
+) {
+  try {
+    const session = await auth();
+
+    if (!session) {
+      throw new Error("Sesi tidak ditemukan");
+    }
+
+    if (session.user.role !== "ADMIN") {
+      throw new Error("Sesi tidak valid");
+    }
+
+    const validatedData = updateDestinationSchema.parse(data);
+
+    const oldWisata = await prisma.destination.findFirst({
+      where: { id: validatedData.id },
+    });
+
+    if (oldWisata && oldWisata.slug !== validatedData.slug) {
+      const isWisataExist = await prisma.destination.findFirst({
+        where: { slug: validatedData.slug },
+      });
+
+      if (isWisataExist) {
+        throw new Error("Wisata dengan nama yang sama sudah digunakan.");
+      }
+    }
+
+    await prisma.destination.update({
+      where: { id: validatedData.id },
+      data: {
+        ...validatedData,
+        coordinate: {
+          lat: Number(validatedData.coordinate.lat),
+          lng: Number(validatedData.coordinate.lng),
+        },
+      },
+    });
+
+    revalidatePath("/destinasi");
+    revalidatePath("/admin/wisata");
+
+    return { success: true, message: "Data Wisata berhasil dirubah." };
+  } catch (err) {
+    console.error(err);
+    return {
+      success: false,
+      message: "Gagal merubah data wisata, coba lagi nanti.",
     };
   }
 }

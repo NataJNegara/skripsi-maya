@@ -10,12 +10,14 @@ type FileUploadContextType = {
   filesToStore: File[];
   onUpload: (params: File) => void;
   onDelete: (params: string) => void;
+  setFileToStore: React.Dispatch<React.SetStateAction<File[]>>;
 };
 
 const FileUploadContext = createContext<FileUploadContextType>({
   filesToStore: [],
   onUpload: () => {},
   onDelete: () => {},
+  setFileToStore: () => {},
 });
 
 function FileUploadProvider({ children }: { children: React.ReactNode }) {
@@ -36,7 +38,8 @@ function FileUploadProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <FileUploadContext.Provider value={{ filesToStore, onUpload, onDelete }}>
+    <FileUploadContext.Provider
+      value={{ filesToStore, onUpload, onDelete, setFileToStore }}>
       {children}
     </FileUploadContext.Provider>
   );

@@ -61,3 +61,7 @@ export const insertDestinationSchema = z.object({
   coordinate: coordinateSchema,
   location: z.string().min(1, "Alamat atau lokasi wisata harus diisi."),
 });
+
+export const updateDestinationSchema = insertDestinationSchema.extend({
+  id: z.string().min(1, "Id Wajib diisi."),
+});

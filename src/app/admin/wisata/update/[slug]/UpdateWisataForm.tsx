@@ -21,64 +21,97 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useFileUpload } from "@/context/FileUploadContext";
-import { createDestinationAction } from "@/lib/actions/destinationActions";
-import { insertDestinationSchema } from "@/lib/validator";
+import {
+  createDestinationAction,
+  updateDestinationAction,
+} from "@/lib/actions/destinationActions";
+import {
+  coordinateSchema,
+  insertDestinationSchema,
+  updateDestinationSchema,
+} from "@/lib/validator";
+import { Destination } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader } from "lucide-react";
+import { Loader, Loader2, Trash2Icon } from "lucide-react";
+import Image from "next/image";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const destinationDefaultValues: z.infer<typeof insertDestinationSchema> = {
-  title: "",
-  slug: "",
-  tag: "",
-  preview: "",
-  bannerImg: "",
-  destinationImages: [],
-  content: "",
-  coordinate: { lat: "", lng: "" },
-  location: "",
-};
+const UpdateWisataForm = ({ destination }: { destination: Destination }) => {
+  const [isDeletingImage, setIsDeletingImage] = useState(false);
 
-const CreateWisataForm = () => {
-  const form = useForm<z.infer<typeof insertDestinationSchema>>({
-    resolver: zodResolver(insertDestinationSchema),
-    defaultValues: destinationDefaultValues,
+  const form = useForm<z.infer<typeof updateDestinationSchema>>({
+    resolver: zodResolver(updateDestinationSchema),
+    defaultValues: {
+      ...destination,
+      coordinate: destination.coordinate as z.infer<typeof coordinateSchema>,
+    },
   });
 
-  const { filesToStore, setFileToStore } = useFileUpload();
+  const { filesToStore, onUpload, setFileToStore } = useFileUpload();
 
-  const onSubmit = async (data: z.infer<typeof insertDestinationSchema>) => {
-    const res = await createDestinationAction(data);
+  const onSubmit = async (data: z.infer<typeof updateDestinationSchema>) => {
+    const res = await updateDestinationAction(data);
 
     if (!res.success) {
       return toast.error(res.message);
     }
 
-    // TODO: SET filesToStore back to null
-    setFileToStore([]);
     toast.success(res.message);
     redirect("/admin/wisata");
   };
 
   useEffect(() => {
-    if (filesToStore.length > 0) {
-      // set banner image
-      form.setValue("bannerImg", filesToStore[0].fileUrl);
+    if (destination.destinationImages.length > 0) {
+      setFileToStore([]);
 
+      destination.destinationImages.map((item) => onUpload({ fileUrl: item }));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (filesToStore.length > 0) {
       // set all images
       form.setValue(
         "destinationImages",
         filesToStore.map((item) => item.fileUrl)
       );
     }
-  }, [filesToStore, form]);
+  }, [filesToStore]);
 
   const titleValue = form.watch("title");
+
+  const deleteImage = async (fileUrl: string) => {
+    try {
+      setIsDeletingImage(true);
+      const imageKey = fileUrl.split("/")[3];
+
+      const res = await fetch("/api/s3/delete", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          key: imageKey,
+        }),
+      });
+
+      if (!res.ok) {
+        return toast.error("Failed to delete image");
+      }
+
+      const { message } = await res.json();
+      toast.success(message);
+      setFileToStore((prev) => prev.filter((item) => item.fileUrl !== fileUrl));
+    } catch (err) {
+      console.error(err);
+      toast.error("Oopss terjadi kesalahan, coba lagi nanti");
+    } finally {
+      setIsDeletingImage(false);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -169,21 +202,38 @@ const CreateWisataForm = () => {
         <div className="flex flex-col gap-2">
           <p className="font-semibold text-sm">Gambar Wisata</p>
           <Uploader />
-        </div>
 
-        {/* <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Konten</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="Konten" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
+          {/* old image */}
+          <div className="grid grid-cols-4 md:grid-cols-6 xl:grid-cols-8 gap-2">
+            {filesToStore.map((item) => (
+              <div key={item.fileUrl} className="flex flex-col gap-1">
+                <div className="relative aspect-square rounded-lg overflow-hidden">
+                  <Image
+                    src={item.fileUrl}
+                    alt={`${destination.title} images`}
+                    width={200}
+                    height={100}
+                    className="object-cover w-full h-full"
+                  />
+
+                  {/*  DELETE BUTTON */}
+                  <Button
+                    variant="destructive"
+                    type="button"
+                    className="absolute top-2 right-2 cursor-pointer"
+                    disabled={isDeletingImage}
+                    onClick={() => deleteImage(item.fileUrl)}>
+                    {isDeletingImage ? (
+                      <Loader2 className="animate-spin" />
+                    ) : (
+                      <Trash2Icon />
+                    )}
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <FormField
           control={form.control}
@@ -192,7 +242,7 @@ const CreateWisataForm = () => {
             <FormItem>
               <FormLabel>Konten</FormLabel>
               <FormControl>
-                <TipTap description={field.name} onChange={field.onChange} />
+                <TipTap description={field.value} onChange={field.onChange} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -268,4 +318,4 @@ const CreateWisataForm = () => {
   );
 };
 
-export default CreateWisataForm;
+export default UpdateWisataForm;
