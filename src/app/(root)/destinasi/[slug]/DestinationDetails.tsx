@@ -9,7 +9,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Coordinate, Destination } from "@/types";
-import { BookmarkPlus, MapPin } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const MyMap = dynamic(() => import("@/components/MyMap"), {

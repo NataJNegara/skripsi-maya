@@ -21,15 +21,8 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useFileUpload } from "@/context/FileUploadContext";
-import {
-  createDestinationAction,
-  updateDestinationAction,
-} from "@/lib/actions/destinationActions";
-import {
-  coordinateSchema,
-  insertDestinationSchema,
-  updateDestinationSchema,
-} from "@/lib/validator";
+import { updateDestinationAction } from "@/lib/actions/destinationActions";
+import { coordinateSchema, updateDestinationSchema } from "@/lib/validator";
 import { Destination } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, Loader2, Trash2Icon } from "lucide-react";
