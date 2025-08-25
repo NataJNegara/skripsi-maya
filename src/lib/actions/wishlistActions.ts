@@ -2,7 +2,6 @@
 
 import { prisma } from "@/db/prisma";
 import { auth } from "../auth";
-import { formatError } from "../utils";
 import { PAGE_SIZE } from "../constant";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
@@ -49,7 +48,7 @@ export async function addWishlistAction(slug: string) {
     console.error(err);
     return {
       success: false,
-      message: formatError(err),
+      message: "Gagal menambahkan wishlist. coba lagi nanti",
     };
   }
 }
@@ -119,6 +118,6 @@ export async function deleteWishlistAction(id: string) {
     return { success: true, message: "Wishlist berhasil diperbarui." };
   } catch (err) {
     console.error(err);
-    return { success: false, message: formatError(err) };
+    return { success: false, message: "Wishlist gagal dihapus." };
   }
 }
