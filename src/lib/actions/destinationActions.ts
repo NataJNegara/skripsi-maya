@@ -1,13 +1,12 @@
 "use server";
 
 import { prisma } from "@/db/prisma";
-import { revalidatePath, unstable_cacheTag as cacheTag } from "next/cache";
+import { Prisma } from "@prisma/client";
+import { unstable_cacheTag as cacheTag, revalidatePath } from "next/cache";
 import { z } from "zod";
 import { auth } from "../auth";
-import { insertDestinationSchema, updateDestinationSchema } from "../validator";
-import { Prisma } from "@prisma/client";
 import { BASE_URL, PAGE_SIZE } from "../constant";
-import { redirect } from "next/navigation";
+import { insertDestinationSchema, updateDestinationSchema } from "../validator";
 
 // =========================CREATE
 export async function createDestinationAction(
