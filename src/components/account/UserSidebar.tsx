@@ -3,7 +3,7 @@ import SignOutButton from "../SignOutButton";
 
 const userSidebarLinks = [
   { title: "Dashboard", href: "/user" },
-  { title: "Favorite", href: "/user/favorite" },
+  { title: "Wishlist", href: "/user/wishlist" },
   { title: "Profile", href: "/user/profile" },
 ];
 

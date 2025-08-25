@@ -1,10 +1,11 @@
-import { getDestinationBySlug } from "@/lib/actions/destinationActions";
-import { notFound } from "next/navigation";
-import DestinationDetails from "./DestinationDetails";
-import { Suspense } from "react";
 import Spinner from "@/components/Spinner";
-import { BookmarkPlus, MapPin } from "lucide-react";
+import { getDestinationBySlug } from "@/lib/actions/destinationActions";
 import { auth } from "@/lib/auth";
+import { MapPin } from "lucide-react";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import AddToWhisListButton from "./AddToWishlistButton";
+import DestinationDetails from "./DestinationDetails";
 
 type DestinationDetailProps = {
   params: Promise<{ slug: string }>;
@@ -31,12 +32,10 @@ const Page = async ({ params }: DestinationDetailProps) => {
           <p className="xl:text-lg">{destination.preview}</p>
         </div>
         {session?.user.role !== "ADMIN" && (
-          <div className="md:ml-auto">
-            <button className="w-full md:w-fit flex justify-center items-center gap-2 py-3 px-6 bg-brand-accent hover:bg-brand transition-all duration-300 cursor-pointer font-semibold text-sm 2xl:text-lg text-brand-white-alt whitespace-nowrap">
-              <BookmarkPlus className="w-5 h-5 2xl:w-8 2xl:h-8" />
-              Simpan ke Whislist
-            </button>
-          </div>
+          <AddToWhisListButton
+            userId={session?.user.id}
+            destinationSlug={destination.slug}
+          />
         )}
       </div>
 

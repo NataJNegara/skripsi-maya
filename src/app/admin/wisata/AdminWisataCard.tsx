@@ -33,8 +33,10 @@ const AdminWisataCard = ({ destination }: { destination: Destination }) => {
               className={cn(
                 "capitalize text-sm px-4 rounded-full",
                 destination.tag === "ALAM"
+                  ? "bg-gray-800 text-gray-50"
+                  : destination.tag === "BUDAYA"
                   ? "bg-yellow-500 text-yellow-50"
-                  : "bg-gray-800 text-gray-50"
+                  : "bg-brand-accent text-brand-white-alt"
               )}>
               {destination.tag.toLocaleLowerCase()}
             </p>

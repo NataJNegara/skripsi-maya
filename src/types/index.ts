@@ -23,3 +23,12 @@ export type Post = z.infer<typeof insertPostSchema> & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Wishlist = {
+  id: string;
+  userId: string;
+  destinationId: string;
+  destination: Destination;
+  createdAt: Date;
+  updatedAt: Date;
+};
