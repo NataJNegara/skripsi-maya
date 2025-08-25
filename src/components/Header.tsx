@@ -3,8 +3,9 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import Navigation from "./shared/Navigation";
+import UserButton from "./UserButton";
 
 const navigationLinks = [
   { title: "Destinasi", href: "/destinasi" },
@@ -13,7 +14,7 @@ const navigationLinks = [
   { title: "Tentang", href: "/tentang" },
 ];
 
-const Header = () => {
+const Header = ({ userButton }: { userButton: ReactNode }) => {
   const [prevScroll, setPrevScroll] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -52,8 +53,9 @@ const Header = () => {
         isVisible ? "" : "-translate-y-full",
         pathname !== "/" && !isScrolled ? "text-brand!" : "text-brand-white"
       )}>
-      <div className="h-20 grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center justify-between">
-        <Link href="/" className="uppercase text-2xl font-bold font-mak">
+      {/*  */}
+      <div className="h-20 flex items-center justify-between">
+        <Link href="/" className="uppercase font-caveat text-2xl font-bold">
           Muara Enim
         </Link>
         <nav className="hidden lg:block">
@@ -67,8 +69,9 @@ const Header = () => {
             ))}
           </ul>
         </nav>
-        <div className="hidden lg:block justify-self-end">
-          <Navigation isScrolled={prevScroll > 100} pathname={pathname} />
+        <div className=" justify-self-end">
+          {/* <Navigation isScrolled={prevScroll > 100} pathname={pathname} /> */}
+          {userButton}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import UserButton from "@/components/UserButton";
 
 export default function RootLayout({
   children,
@@ -8,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      <Header />
+      <Header userButton={<UserButton />} />
       <main>{children}</main>
       <Footer />
     </div>
