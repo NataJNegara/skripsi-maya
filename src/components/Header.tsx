@@ -4,8 +4,6 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import Navigation from "./shared/Navigation";
-import UserButton from "./UserButton";
 
 const navigationLinks = [
   { title: "Destinasi", href: "/destinasi" },
@@ -69,10 +67,7 @@ const Header = ({ userButton }: { userButton: ReactNode }) => {
             ))}
           </ul>
         </nav>
-        <div className=" justify-self-end">
-          {/* <Navigation isScrolled={prevScroll > 100} pathname={pathname} /> */}
-          {userButton}
-        </div>
+        <div className=" justify-self-end">{userButton}</div>
       </div>
     </div>
   );
