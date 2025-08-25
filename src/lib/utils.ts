@@ -52,6 +52,7 @@ export const formatDateTime = (dateString: Date) => {
 };
 
 // format errors handler (i dont like it)
+// eslist-disable-next-line
 export function formatError(error: any) {
   if (error.name === "ZodError") {
     // handle zod error
