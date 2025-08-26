@@ -66,6 +66,10 @@ const CreateWisataForm = () => {
   };
 
   useEffect(() => {
+    setFileToStore([]);
+  }, []);
+
+  useEffect(() => {
     if (filesToStore.length > 0) {
       // set banner image
       form.setValue("bannerImg", filesToStore[0].fileUrl);
