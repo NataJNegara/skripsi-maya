@@ -29,6 +29,7 @@ const SearchBar = () => {
       action={formActionUrl}
       className="w-full md:w-1/4 flex gap-2">
       <Input
+        className="placeholder:text-sm"
         type="search"
         name="searchQuery"
         placeholder="pencarian..."

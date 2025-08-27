@@ -24,7 +24,7 @@ const PostList = async ({ page, category, searchQuery }: PostListProps) => {
         menampilkan {posts.length} dari {totalData} postingan.
       </p>
 
-      <div className="flex flex-col gap-2 mb-10">
+      <div className="flex flex-col gap-4 mb-10">
         {posts.map((post) => (
           <AdminPostCard post={post} key={post.id} />
         ))}

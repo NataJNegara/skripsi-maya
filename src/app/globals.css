@@ -191,7 +191,7 @@ input {
   /* end of horizontal scroll */
 
   .page-container {
-    @apply min-h-screen h-full w-full xl:max-w-5xl 2xl:max-w-7xl mx-auto py-32 2xl:py-48 px-4 xl:px-0;
+    @apply min-h-screen h-full w-full xl:max-w-5xl 2xl:max-w-7xl mx-auto py-32 2xl:py-48 px-2 xl:px-0;
   }
 
   .padding-horizontal {

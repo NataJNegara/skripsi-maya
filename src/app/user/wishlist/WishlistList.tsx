@@ -2,6 +2,7 @@ import { getMyWishlistAction } from "@/lib/actions/wishlistActions";
 import { auth } from "@/lib/auth";
 import WishlistCard from "./WishlistCard";
 import Pagination from "@/components/shared/Pagination";
+import Link from "next/link";
 
 type WishlistListProps = {
   page: string;
@@ -19,9 +20,16 @@ const WishlistList = async ({ page, category }: WishlistListProps) => {
 
   if (!wishlist.length)
     return (
-      <p className="text-gray-400 font-semibold italic text-center py-8">
-        Belum ada wishlist.
-      </p>
+      <div className="flex flex-col gap-2 items-center justify-center py-8">
+        <p className="text-gray-400 font-semibold italic text-center">
+          Belum ada wishlist.
+        </p>
+        <Link
+          href={`/destinasi`}
+          className="bg-brand hover:bg-brand-secondary text-brand-white-alt px-6 p-2 font-semibold transition-all duration-300">
+          Tambah wishlist
+        </Link>
+      </div>
     );
 
   return (
@@ -30,7 +38,7 @@ const WishlistList = async ({ page, category }: WishlistListProps) => {
         menampilkan {wishlist.length} dari {dataCount} wishlist.
       </p>
 
-      <div className="space-y-2">
+      <div className="space-y-4">
         {wishlist.map((wish) => (
           <WishlistCard wish={wish} key={wish.id} />
         ))}

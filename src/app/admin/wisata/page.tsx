@@ -36,7 +36,7 @@ const Page = async ({ searchParams }: WisataPageProps) => {
       </div>
 
       {/* searchbar & filter */}
-      <div className="flex justify-between mb-8">
+      <div className="flex flex-col md:flex-row gap-6 justify-between mb-8">
         <SearchBar />
         <div className="">
           <Filter

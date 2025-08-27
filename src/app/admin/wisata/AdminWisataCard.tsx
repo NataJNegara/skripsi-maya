@@ -1,4 +1,5 @@
 import DeleteDialog from "@/components/shared/DeleteDialog";
+import { Button } from "@/components/ui/button";
 import { deleteDestinationById } from "@/lib/actions/destinationActions";
 import { cn, formatDateTime, textShorter } from "@/lib/utils";
 import { Destination } from "@/types";
@@ -8,9 +9,9 @@ import Link from "next/link";
 
 const AdminWisataCard = ({ destination }: { destination: Destination }) => {
   return (
-    <div className="border grid grid-cols-[1fr_auto]">
-      <div className="flex gap-2">
-        <div className="relative w-[150px] h-[100px]">
+    <div className="border border-brand-secondary grid md:grid-cols-[1fr_auto]">
+      <div className="flex flex-col md:flex-row gap-2">
+        <div className="relative w-full md:w-[150px] h-42 md:h-32">
           <Image
             src={destination.bannerImg}
             alt="contoh gambar"
@@ -26,7 +27,7 @@ const AdminWisataCard = ({ destination }: { destination: Destination }) => {
               className="font-semibold capitalize">
               {destination.title}
             </Link>
-            <p className="text-base ">{textShorter(destination.preview)}</p>
+            <p className="text-sm">{textShorter(destination.preview)}</p>
           </div>
           <div className="flex items-center justify-between">
             <p
@@ -46,13 +47,17 @@ const AdminWisataCard = ({ destination }: { destination: Destination }) => {
           </div>
         </div>
       </div>
-      <div className="w-fit border-l">
-        <Link
-          href={`/admin/wisata/update/${destination.slug}`}
-          className="flex items-center gap-2 w-full h-1/2 px-3 hover:bg-yellow-500 hover:text-yellow-50 text-sm font-semibold transition-all duration-300">
-          <SquarePen size={16} />
-          <span>Ubah</span>
-        </Link>
+      <div className="flex flex-col border-t md:border-t-0 md:border-l border-brand-secondary w-full md:w-[100px]">
+        <Button
+          asChild
+          className="rounded-none bg-transparent hover:bg-yellow-500 text-brand hover:text-brand-white-alt">
+          <Link
+            href={`/admin/wisata/update/${destination.slug}`}
+            className="flex gap-2 items-center justify-center flex-grow border-b border-brand-secondary px-4 py-2 font-semibold ">
+            <SquarePen size={16} />
+            <span>Ubah</span>
+          </Link>
+        </Button>
 
         <DeleteDialog id={destination.id} action={deleteDestinationById} />
       </div>

@@ -24,7 +24,7 @@ const WisataList = async ({ page, category, searchQuery }: WisataListProps) => {
         menampilkan {destinations.length} dari {totalData} postingan.
       </p>
 
-      <div className="flex flex-col gap-2 mb-10">
+      <div className="flex flex-col gap-4 mb-10">
         {destinations.map((destination) => (
           <AdminWisataCard destination={destination} key={destination.id} />
         ))}
