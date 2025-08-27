@@ -9,7 +9,7 @@ const BlogSection = async () => {
   return (
     <section className="section">
       <div className="2xl:w-1/2 mb-16">
-        <h2>Blog</h2>
+        <h2 className="text-5xl xl:text-7xl font-caveat">Blog</h2>
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
           excepturi consequuntur reprehenderit quasi earum magnam asperiores
@@ -25,7 +25,7 @@ const BlogSection = async () => {
         ))}
       </div>
       <div className="text-center">
-        <Link href="/events" className="w-fit button-brand py-4 px-8">
+        <Link href="/berita" className="w-fit button-brand py-4 px-8">
           Lihat Semua
         </Link>
       </div>

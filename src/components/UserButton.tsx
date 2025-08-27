@@ -49,11 +49,11 @@ const UserButton = async () => {
               src={session?.user.image || userInitial}
               alt="user profile image"
             />
-            <AvatarFallback className="bg-brand text-brand-white-alt">
+            <AvatarFallback className="bg-brand-accent text-brand-white-alt">
               {userInitial}
             </AvatarFallback>
           </Avatar>
-          <p className="hidden md:block font-semibold">{session.user.name}</p>
+          <p className="font-semibold">{session.user.name}</p>
         </div>
       </DropdownMenuTrigger>
 

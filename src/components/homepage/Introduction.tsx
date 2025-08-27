@@ -11,15 +11,16 @@ const Introduction = () => {
             alt="image of muara enim introduction"
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
         <div className="xl:p-10 2xl:p-20">
           <div className="flex flex-col gap-4 mb-16">
             <p className="sub-title">selamat datang</p>
-            <p className="text-2xl xl:text-3xl 2xl:text-5xl font-semibold font-mak">
+            <p className="text-2xl text-brand xl:text-3xl 2xl:text-5xl font-semibold font-caveat">
               Muara Enim Kota Serasan Sekundang
             </p>
-            <p>
+            <p className="xl:text-lg">
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Perferendis fugiat nemo cupiditate officia maxime necessitatibus
               aperiam, accusamus officiis esse sed cum quibusdam saepe corrupti
@@ -38,6 +39,7 @@ const Introduction = () => {
               alt="secondary image of muara enim introduction"
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>

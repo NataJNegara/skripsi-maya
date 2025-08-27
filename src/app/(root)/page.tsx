@@ -20,7 +20,8 @@ export default function Home() {
         <BlogSection />
       </div>
       <EyeCatcher
-        text="bagikan kenangan anda #TandangMuaraEnim"
+        text={`bagikan kenangan anda`}
+        secondText="#TandangMuaraEnim"
         imageSrc="/images/eye-catcher-01.jpg"
       />
     </>

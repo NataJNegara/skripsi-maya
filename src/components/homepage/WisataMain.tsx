@@ -9,13 +9,14 @@ const WisataMain = () => {
           src="/images/wisata-01.jpg"
           alt="image of wisata xxx"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover"
         />
       </div>
       <div className="py-8 2xl:py-16">
         <div className="xl:w-1/2">
           <p className="sub-title mb-2">WISATA ALAM</p>
-          <p className="text-3xl 2xl:text-5xl mb-6">
+          <p className="font-caveat text-3xl 2xl:text-5xl mb-6">
             Lorem ipsum dolor sit amet
           </p>
           <p className="text-xl 2xl:text-2xl mb-8 xl:pb-16">

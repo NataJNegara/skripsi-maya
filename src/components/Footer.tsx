@@ -5,9 +5,8 @@ import { footerSocials } from "@/db/data-service";
 const footerLinks = [
   { title: "destinasi", href: "/destinasi" },
   { title: "event", href: "/event" },
-  { title: "blog", href: "/blog" },
+  { title: "berita", href: "/berita" },
   { title: "tentang", href: "/tentang" },
-  { title: "faq", href: "/faq" },
 ];
 
 const Footer = () => {

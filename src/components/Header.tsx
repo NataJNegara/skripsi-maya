@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import Navigation from "./shared/Navigation";
 
 const navigationLinks = [
   { title: "Destinasi", href: "/destinasi" },
@@ -52,8 +53,8 @@ const Header = ({ userButton }: { userButton: ReactNode }) => {
         pathname !== "/" && !isScrolled ? "text-brand!" : "text-brand-white"
       )}>
       {/*  */}
-      <div className="h-20 flex items-center justify-between">
-        <Link href="/" className="uppercase font-caveat text-2xl font-bold">
+      <div className="h-18 xl:h-20 flex items-center justify-between">
+        <Link href="/" className="capitalize font-caveat text-2xl font-bold">
           Muara Enim
         </Link>
         <nav className="hidden lg:block">
@@ -67,7 +68,14 @@ const Header = ({ userButton }: { userButton: ReactNode }) => {
             ))}
           </ul>
         </nav>
-        <div className=" justify-self-end">{userButton}</div>
+        <div className="justify-self-end hidden lg:block">{userButton}</div>
+        <div className="lg:hidden">
+          <Navigation
+            isScrolled={isScrolled}
+            pathname={pathname}
+            userButton={userButton}
+          />
+        </div>
       </div>
     </div>
   );
