@@ -57,7 +57,7 @@ const CommentList = ({ userId, destinationId, slug }: CommentListProps) => {
             </p>
             <Button asChild>
               <Link
-                href={`/sign-in`}
+                href={`/sign-in?callbackUrl=/destinasi/${slug}`}
                 className="w-fit self-center rounded-none bg-brand! hover:bg-brand-secondary!">
                 Masuk
               </Link>

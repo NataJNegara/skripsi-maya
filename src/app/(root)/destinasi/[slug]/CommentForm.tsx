@@ -9,7 +9,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { addCommentAction } from "@/lib/actions/commentActions";
 import { insertCommentSchema } from "@/lib/validator";
