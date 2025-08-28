@@ -1,8 +1,7 @@
-import { getMyWishlistAction } from "@/lib/actions/wishlistActions";
-import { auth } from "@/lib/auth";
-import WishlistCard from "./WishlistCard";
 import Pagination from "@/components/shared/Pagination";
+import { getMyWishlistAction } from "@/lib/actions/wishlistActions";
 import Link from "next/link";
+import WishlistCard from "./WishlistCard";
 
 type WishlistListProps = {
   page: string;
@@ -10,10 +9,7 @@ type WishlistListProps = {
 };
 
 const WishlistList = async ({ page, category }: WishlistListProps) => {
-  const session = await auth();
-
   const { wishlist, dataCount, pageCount } = await getMyWishlistAction({
-    userId: session?.user.id as string,
     page: Number(page),
     category,
   });

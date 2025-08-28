@@ -40,6 +40,9 @@ export async function addWishlistAction(slug: string) {
       },
     });
 
+    revalidatePath("/user/wishlist");
+    revalidatePath(`/destinasi/${destination.slug}`);
+
     return {
       success: true,
       message: "Wisata berhasil di tambahkan ke wishlist.",
@@ -55,34 +58,38 @@ export async function addWishlistAction(slug: string) {
 
 // ============================================GET ALL WISHLIST
 type GetMyWishlistActionProps = {
-  userId: string;
   category?: string;
-  page: number;
+  page?: number;
   limit?: number;
 };
 
 export async function getMyWishlistAction({
-  userId,
   category,
   page,
   limit = PAGE_SIZE,
 }: GetMyWishlistActionProps) {
+  const session = await auth();
+
+  if (!session) {
+    throw new Error("Sesi tidak ditemukan.");
+  }
+
   const categoryFilter: Prisma.WishlistWhereInput =
     category !== "SEMUA" && category?.length !== 0
       ? { destination: { tag: category } }
       : {};
 
   const wishlist = await prisma.wishlist.findMany({
-    where: { userId, ...categoryFilter },
+    where: { userId: session.user.id, ...categoryFilter },
     include: {
       destination: true,
     },
-    skip: (page - 1) * limit,
+    skip: page ? (page - 1) * limit : 0,
     orderBy: { createdAt: "desc" },
   });
 
   const dataCount = await prisma.wishlist.count({
-    where: { userId, ...categoryFilter },
+    where: { userId: session.user.id, ...categoryFilter },
   });
 
   return { wishlist, dataCount, pageCount: Math.ceil(dataCount / limit) };

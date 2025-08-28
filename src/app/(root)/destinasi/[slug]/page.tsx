@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import AddToWhisListButton from "./AddToWishlistButton";
 import DestinationDetails from "./DestinationDetails";
+import { getMyWishlistAction } from "@/lib/actions/wishlistActions";
 
 type DestinationDetailProps = {
   params: Promise<{ slug: string }>;
@@ -13,8 +14,12 @@ type DestinationDetailProps = {
 
 const Page = async ({ params }: DestinationDetailProps) => {
   const { slug } = await params;
-  const destination = await getDestinationBySlug(slug);
   const session = await auth();
+
+  const [destination, { wishlist }] = await Promise.all([
+    getDestinationBySlug(slug),
+    getMyWishlistAction({}),
+  ]);
 
   if (!destination) return notFound();
 
@@ -35,6 +40,7 @@ const Page = async ({ params }: DestinationDetailProps) => {
           <AddToWhisListButton
             userId={session?.user.id}
             destinationSlug={destination.slug}
+            wishlist={wishlist}
           />
         )}
       </div>

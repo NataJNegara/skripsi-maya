@@ -37,7 +37,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${fontMak.variable} ${caveatSans.variable} antialiased relative`}>
         {children}
-        <Toaster richColors theme="light" />
+        <Toaster
+          richColors
+          theme="light"
+          toastOptions={{
+            classNames: {
+              actionButton: "bg-brand-accent! text-brand-white-alt!",
+            },
+          }}
+        />
       </body>
     </html>
   );
