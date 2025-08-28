@@ -27,6 +27,7 @@ export default function MyMap({ coordinate }: { coordinate: Coordinate }) {
     <MapContainer
       center={[coordinate.lat, coordinate.lng]}
       zoom={14}
+      scrollWheelZoom={false}
       style={{ height: "400px", width: "100%" }}
       className="z-40">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

@@ -70,9 +70,9 @@ export async function getMyWishlistAction({
 }: GetMyWishlistActionProps) {
   const session = await auth();
 
-  if (!session) {
-    throw new Error("Sesi tidak ditemukan.");
-  }
+  // if (!session) {
+  //   throw new Error("Sesi tidak ditemukan.");
+  // }
 
   const categoryFilter: Prisma.WishlistWhereInput =
     category !== "SEMUA" && category?.length !== 0
@@ -80,7 +80,7 @@ export async function getMyWishlistAction({
       : {};
 
   const wishlist = await prisma.wishlist.findMany({
-    where: { userId: session.user.id, ...categoryFilter },
+    where: { userId: session?.user.id, ...categoryFilter },
     include: {
       destination: true,
     },
@@ -89,7 +89,7 @@ export async function getMyWishlistAction({
   });
 
   const dataCount = await prisma.wishlist.count({
-    where: { userId: session.user.id, ...categoryFilter },
+    where: { userId: session?.user.id, ...categoryFilter },
   });
 
   return { wishlist, dataCount, pageCount: Math.ceil(dataCount / limit) };

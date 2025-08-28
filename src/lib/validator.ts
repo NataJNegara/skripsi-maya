@@ -65,3 +65,9 @@ export const insertDestinationSchema = z.object({
 export const updateDestinationSchema = insertDestinationSchema.extend({
   id: z.string().min(1, "Id Wajib diisi."),
 });
+
+export const insertCommentSchema = z.object({
+  userId: z.string().min(1, "Id User harus diisi."),
+  destinationId: z.string().min(1, "Id Wisata harus diisi."),
+  text: z.string().min(1, "Komentar tidak boleh kosong").trim(),
+});

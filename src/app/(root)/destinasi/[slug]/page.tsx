@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import AddToWhisListButton from "./AddToWishlistButton";
 import DestinationDetails from "./DestinationDetails";
 import { getMyWishlistAction } from "@/lib/actions/wishlistActions";
+import CommentList from "./CommentList";
 
 type DestinationDetailProps = {
   params: Promise<{ slug: string }>;
@@ -48,6 +49,14 @@ const Page = async ({ params }: DestinationDetailProps) => {
       <Suspense fallback={<Spinner />}>
         <DestinationDetails destination={destination} />
       </Suspense>
+
+      <div className="pt-16">
+        <CommentList
+          userId={session?.user.id}
+          destinationId={destination.id}
+          slug={slug}
+        />
+      </div>
     </div>
   );
 };

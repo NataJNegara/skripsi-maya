@@ -14,7 +14,7 @@ const Footer = () => {
     <footer className="w-full padding-x bg-brand text-brand-white">
       <div className="grid sm:grid-cols-[auto_1fr] gap-16 py-10 mb-16">
         <div className="">
-          <p className="text-4xl xl:text-5xl uppercase font-mak mb-8">
+          <p className="text-4xl xl:text-7xl capitalize font-caveat mb-8">
             muara enim
           </p>
           <p>Alamat : jalan xxxx</p>

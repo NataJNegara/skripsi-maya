@@ -59,10 +59,6 @@ const DestinationDetails = ({ destination }: { destination: Destination }) => {
         </div>
       </div>
       {/* end of map */}
-
-      {/* comment section */}
-      <div className="">COMMENT SECTION</div>
-      {/* end of comment section */}
     </>
   );
 };

@@ -1,4 +1,8 @@
-import { insertDestinationSchema, insertPostSchema } from "@/lib/validator";
+import {
+  insertCommentSchema,
+  insertDestinationSchema,
+  insertPostSchema,
+} from "@/lib/validator";
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
 
@@ -29,6 +33,13 @@ export type Wishlist = {
   userId: string;
   destinationId: string;
   destination: Destination;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type Comment = z.infer<typeof insertCommentSchema> & {
+  id: string;
+  user?: { name: string; email: string | null; image: string | null };
   createdAt: Date;
   updatedAt: Date;
 };
