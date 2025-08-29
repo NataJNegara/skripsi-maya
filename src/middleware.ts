@@ -14,13 +14,16 @@ export async function middleware(request: NextRequest) {
         ? "authjs.session-token"
         : "__Secure-authjs.session-token",
   });
+
   // get user role
   const userRole = token?.role;
 
   //   check if user logged in
   if (token && (pathname === "/sign-in" || pathname === "/sign-up")) {
+    const callbackUrl = request.nextUrl.searchParams.get("callbackUrl");
+
     return NextResponse.redirect(
-      new URL(getDefaultRoute(userRole as string), request.url)
+      new URL(callbackUrl ? callbackUrl : "/", request.url)
     );
   }
 

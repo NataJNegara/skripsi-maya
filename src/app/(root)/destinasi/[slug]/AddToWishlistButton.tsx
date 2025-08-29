@@ -5,7 +5,7 @@ import {
   deleteWishlistAction,
 } from "@/lib/actions/wishlistActions";
 import { Wishlist } from "@/types";
-import { BookmarkMinus, BookmarkPlus, Loader, LogIn } from "lucide-react";
+import { BookmarkMinus, BookmarkPlus, Loader } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
@@ -70,10 +70,10 @@ const AddToWhisListButton = ({
       {!userId && (
         <div className="md:ml-auto">
           <Link
-            href={`/sign-in`}
-            className="w-full md:w-fit flex justify-center items-center gap-4 py-3 px-6 bg-brand-accent! hover:bg-brand! transition-all duration-300 cursor-pointer font-semibold text-sm 2xl:text-lg text-brand-white-alt whitespace-nowrap">
-            <LogIn />
-            <span>Login</span>
+            href={`/sign-in?callbackUrl=/destinasi/${destinationSlug}`}
+            className="w-full md:w-64 h-12 lg:h-16 flex justify-center items-center gap-2 bg-brand-accent hover:bg-brand transition-all duration-300 cursor-pointer font-semibold text-sm 2xl:text-lg text-brand-white-alt whitespace-nowrap">
+            <BookmarkPlus className="w-6 h-6 lg:w-8 lg:h-8" />
+            Simpan ke Whislist
           </Link>
         </div>
       )}

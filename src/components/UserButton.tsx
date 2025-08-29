@@ -46,7 +46,7 @@ const UserButton = async () => {
         <div className="flex gap-2 items-center cursor-pointer">
           <Avatar>
             <AvatarImage
-              src={session?.user.image || userInitial}
+              src={session?.user.image || ""}
               alt="user profile image"
             />
             <AvatarFallback className="bg-brand-accent text-brand-white-alt">

@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { signUpAction } from "@/lib/actions/authActions";
 import { signUpFormSchema } from "@/lib/validator";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -99,8 +100,13 @@ const SignUpForm = () => {
         <div className="mt-4">
           <Button
             className="w-full rounded-none cursor-pointer bg-brand hover:bg-brand-secondary"
-            size="lg">
-            Login
+            size="lg"
+            disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting ? (
+              <Loader className="animate-spin" />
+            ) : (
+              "Daftar"
+            )}
           </Button>
         </div>
       </form>
