@@ -2,7 +2,7 @@
 
 import Spinner from "@/components/Spinner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getComment } from "@/lib/actions/commentActions";
+import { deleteCommentAction, getComment } from "@/lib/actions/commentActions";
 import { Comment } from "@/types";
 import { useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
@@ -10,14 +10,21 @@ import { formatDistanceToNow } from "date-fns";
 import { id as localeID } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import DropdownAction from "@/components/DropdownAction";
 
 type CommentListProps = {
   userId: string | undefined;
   destinationId: string;
   slug: string;
+  userRole: string | undefined;
 };
 
-const CommentList = ({ userId, destinationId, slug }: CommentListProps) => {
+const CommentList = ({
+  userId,
+  destinationId,
+  slug,
+  userRole,
+}: CommentListProps) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -91,6 +98,16 @@ const CommentList = ({ userId, destinationId, slug }: CommentListProps) => {
                       })}
                     </p>
                   </div>
+                  {userId === comment.userId ||
+                    (userRole === "ADMIN" && (
+                      <div className="ml-auto">
+                        <DropdownAction
+                          deleteId={comment.id}
+                          onDelete={deleteCommentAction}
+                          onActionSuccess={handleReload}
+                        />
+                      </div>
+                    ))}
                 </div>
                 <p>{comment.text}</p>
               </div>

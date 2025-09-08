@@ -55,6 +55,7 @@ const Page = async ({ params }: DestinationDetailProps) => {
           userId={session?.user.id}
           destinationId={destination.id}
           slug={slug}
+          userRole={session?.user.role}
         />
       </div>
     </div>

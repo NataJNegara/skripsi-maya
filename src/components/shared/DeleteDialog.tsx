@@ -18,15 +18,18 @@ import { toast } from "sonner";
 type DeleteDialogProps = {
   id: string;
   action: (params: string) => Promise<{ success: boolean; message: string }>;
+  onActionSuccess?: () => void;
 };
 
-const DeleteDialog = ({ id, action }: DeleteDialogProps) => {
+const DeleteDialog = ({ id, action, onActionSuccess }: DeleteDialogProps) => {
   const handleDelete = async (targetedId: string) => {
     const res = await action(targetedId);
     if (!res.success) {
       return toast.error(res.message);
     }
-
+    if (onActionSuccess) {
+      onActionSuccess();
+    }
     toast.success(res.message);
   };
 

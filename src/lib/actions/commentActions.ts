@@ -57,3 +57,47 @@ export async function addCommentAction(
     };
   }
 }
+
+// =====================================DELETE COMMENT
+export async function deleteCommentAction(id: string) {
+  try {
+    const session = await auth();
+
+    if (!session) {
+      throw new Error("Sesi tidak ditemukan.");
+    }
+
+    const comment = await prisma.comment.findFirst({
+      where: { id },
+      include: {
+        destination: {
+          select: {
+            slug: true,
+          },
+        },
+      },
+    });
+
+    if (!comment) {
+      throw new Error("Comment tidak ditemukan.");
+    }
+
+    if (session.user.id !== comment.userId && session.user.role !== "ADMIN") {
+      throw new Error("Unauthorized: sesi tidak valid.");
+    }
+
+    await prisma.comment.delete({
+      where: { id },
+    });
+
+    revalidatePath(`/destinasi/${comment.destination.slug}`);
+
+    return { success: true, message: "komentar berhasil di hapus." };
+  } catch (err) {
+    console.error(err);
+    return {
+      success: false,
+      message: "Opps terjadi kesalah, coba lagi nanti.",
+    };
+  }
+}

@@ -59,7 +59,7 @@ const CommentForm = ({
               <FormLabel>Komentar</FormLabel>
               <FormControl>
                 <Textarea
-                  className="min-h-24"
+                  className="min-h-24 resize-none"
                   placeholder="tulis komentar..."
                   {...field}
                 />
