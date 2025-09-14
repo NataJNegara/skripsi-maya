@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WisataSectionOne from "./WisataSectionOne";
 import WisataMain from "./WisataMain";
+import { BASE_URL } from "@/lib/constant";
 
 const HorizontalSection = () => {
   const triggerRef = useRef(null);
@@ -48,13 +49,31 @@ const HorizontalSection = () => {
             <WisataSectionOne />
           </div>
           <div className="scroll-section">
-            <WisataMain />
+            <WisataMain
+              title="wisata alam"
+              subTitle="jelajahi keindahan alam muara enim"
+              descriptionText={`Jelajahi surga hijau Muara Enim—air terjun jernih, hutan asri, dan pemandangan yang bikin betah berlama-lama.`}
+              link={`${BASE_URL}/destinasi?tag=ALAM`}
+              imageUrl="/images/wisata-alam.jpg"
+            />
           </div>
           <div className="scroll-section">
-            <WisataMain />
+            <WisataMain
+              title="wisata budaya"
+              subTitle="temukan keunikan budaya muara enim"
+              descriptionText={`Rasakan hangatnya kearifan lokal, seni tradisional, dan warisan sejarah yang memikat hati.`}
+              link={`${BASE_URL}/destinasi?tag=BUDAYA`}
+              imageUrl="/images/wisata-budaya.jpg"
+            />
           </div>
           <div className="scroll-section">
-            <WisataMain />
+            <WisataMain
+              title="wisata buatan"
+              subTitle="kunjungin tempat kreasi keluarga"
+              descriptionText={`Serunya atraksi buatan khas Muara Enim—tempat hiburan, spot foto, dan wahana untuk semua usia.`}
+              link={`${BASE_URL}/destinasi?tag=BUATAN`}
+              imageUrl="/images/wisata-buatan.jpg"
+            />
           </div>
         </div>
       </div>

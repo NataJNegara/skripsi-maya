@@ -8,11 +8,9 @@ const Page = () => {
       <div className="text-center flex flex-col gap-8 items-center justify-center mb-32">
         <p className="page-title">Blog</p>
         <div className="">
-          <p className="text-xl font-light">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia
-            ullam obcaecati ut molestias. Ratione impedit accusantium veritatis
-            dolorum aut vitae et ullam quae, excepturi accusamus quisquam
-            perferendis cumque! Dolores, officiis.
+          <p className="md:text-xl">
+            Berita, cerita, dan sorotan wisata Muara Enim kami hadirkan untuk
+            Anda. Temukan yang baru, yang menarik, dan yang menginspirasi.
           </p>
         </div>
       </div>

@@ -7,7 +7,7 @@ const Introduction = () => {
       <div className="grid xl:grid-cols-2 gap-8 xl:gap-32">
         <div className="relative h-[70vh] xl:h-full xl:min-h-screen">
           <Image
-            src="/images/wisata-01.jpg"
+            src="/images/muara-enim.jpg"
             alt="image of muara enim introduction"
             fill
             className="object-cover"
@@ -20,12 +20,13 @@ const Introduction = () => {
             <p className="text-2xl text-brand xl:text-3xl 2xl:text-5xl font-semibold font-caveat">
               Muara Enim Kota Serasan Sekundang
             </p>
-            <p className="xl:text-lg">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Perferendis fugiat nemo cupiditate officia maxime necessitatibus
-              aperiam, accusamus officiis esse sed cum quibusdam saepe corrupti
-              cumque reiciendis iure ipsam quisquam molestiae, maiores qui nam.
-              Error, cupiditate. Laborum harum quia tempora sit?
+            <p className="md:text-lg">
+              Muara Enim dikenal sebagai Bumi Serasan Sekundang, sebuah tanah
+              yang penuh dengan harmoni alam, budaya, dan kehidupan
+              masyarakatnya. Kabupaten ini dianugerahi bentang alam yang
+              memesona—mulai dari perbukitan hijau yang menenangkan mata, air
+              terjun yang segar dan menyejukkan jiwa, hingga sungai-sungai yang
+              mengalir membawa kesejukan.
             </p>
             <Link
               href="/tentang"
@@ -35,7 +36,7 @@ const Introduction = () => {
           </div>
           <div className="relative mx-auto xl:mx-0 h-[240px] w-[200px] 2xl:h-[280px] 2xl:w-[240px]">
             <Image
-              src="/images/wisata-01.jpg"
+              src="/images/muara-enim.jpg"
               alt="secondary image of muara enim introduction"
               fill
               className="object-cover"

@@ -8,14 +8,12 @@ const BlogSection = async () => {
 
   return (
     <section className="section">
-      <div className="2xl:w-1/2 mb-16">
-        <h2 className="text-5xl xl:text-7xl font-caveat">Blog</h2>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
-          excepturi consequuntur reprehenderit quasi earum magnam asperiores
-          nemo libero adipisci. Fugiat quod eius ullam quibusdam reiciendis!
-          Eius quasi ad iste tenetur? Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Doloribus quasi dignissimos alias et iure.
+      <div className="flex flex-col gap-8 mb-16">
+        <h2 className="text-5xl xl:text-7xl font-caveat capitalize">Blog</h2>
+        <p className="md:w-3xl md:text-lg">
+          Temukan cerita-cerita seru tentang perjalanan dan kehidupan di Muara
+          Enim. Blog ini hadir untuk menginspirasi, memberi informasi, dan
+          menemani setiap langkah wisatamu.
         </p>
       </div>
 

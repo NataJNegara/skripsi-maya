@@ -16,7 +16,7 @@ const Page = async ({
         <p className="page-title">Destinasi</p>
         <p className="page-title pl-32">Wisata</p>
       </div>
-      <p className="text-center text-brand text-sm md:text-base">
+      <p className="text-center text-brand text-sm md:text-lg">
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo
         praesentium id, temporibus laboriosam deleniti culpa soluta laborum. Qui
         autem illum facilis veniam obcaecati, ullam magnam repudiandae.

@@ -8,14 +8,12 @@ const EventSection = async () => {
 
   return (
     <section className="section">
-      <div className="2xl:w-1/2 mb-16">
-        <h2 className="text-5xl xl:text-7xl font-caveat">Acara</h2>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
-          excepturi consequuntur reprehenderit quasi earum magnam asperiores
-          nemo libero adipisci. Fugiat quod eius ullam quibusdam reiciendis!
-          Eius quasi ad iste tenetur? Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Doloribus quasi dignissimos alias et iure.
+      <div className="flex flex-col gap-8 mb-16">
+        <h2 className="text-5xl xl:text-7xl font-caveat capitalize">event</h2>
+        <p className="md:w-3xl md:text-lg">
+          Muara Enim selalu hidup dengan beragam acara menarik. Dari festival
+          budaya, pertunjukan seni, hingga kegiatan komunitas, setiap event
+          adalah cermin kehangatan dan kekayaan Serasan Sekundang.
         </p>
       </div>
 
