@@ -1,7 +1,7 @@
 import { fontMak } from "@/assets/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
-import { Caveat, Geist, Geist_Mono, Josefin_Sans } from "next/font/google";
+import { Caveat, Josefin_Sans } from "next/font/google";
 import "./globals.css";
 
 import "leaflet/dist/leaflet.css";
