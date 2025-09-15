@@ -17,15 +17,11 @@ const Page = async ({
         <p className="page-title pl-32">Wisata</p>
       </div>
       <p className="text-center text-brand text-sm md:text-lg">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo
-        praesentium id, temporibus laboriosam deleniti culpa soluta laborum. Qui
-        autem illum facilis veniam obcaecati, ullam magnam repudiandae.
-        Provident, sed rerum tempora ipsam fugit facere, explicabo voluptas
-        maiores numquam exercitationem nihil officia culpa atque voluptate porro
-        blanditiis. Expedita eos dolore iste quidem facere voluptatum libero
-        minima quibusdam cumque autem eum fuga natus, possimus eaque neque est,
-        ratione similique tempora error, eligendi animi dolor! Et aspernatur
-        dignissimos hic ipsum officia fugit esse odio.
+        Muara Enim menawarkan pesona wisata alam memukau, dari air terjun jernih
+        hingga perbukitan hijau yang menenangkan. Wisata buatan menghadirkan
+        taman rekreasi dan spot kekinian untuk bersantai. Budaya khas, seni
+        tradisi, serta kuliner lokal menambah kehangatan, membuat kunjungan tak
+        terlupakan.
       </p>
 
       <div className="flex justify-center my-16">

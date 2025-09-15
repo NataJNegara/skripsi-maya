@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import SignInForm from "./SignInForm";
 
@@ -22,7 +20,7 @@ const Page = () => {
           <span className="flex-1 h-[1px] bg-gray-200"></span>
         </div>
 
-        <div className="w-full max-w-sm">
+        {/* <div className="w-full max-w-sm">
           <Button
             className="flex items-center gap-4 w-full cursor-pointer bg-white hover:bg-gray-200 border text-dark"
             size="lg">
@@ -34,7 +32,7 @@ const Page = () => {
             />
             <span>Login dengan Google</span>
           </Button>
-        </div>
+        </div> */}
         <div className="">
           <p className="text-sm">
             Belum punya akun?{" "}

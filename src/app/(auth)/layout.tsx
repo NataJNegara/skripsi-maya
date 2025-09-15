@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bgUrl from "/public/images/muara-enim.jpg";
+import bgUrl from "/public/images/bedegung/curup-tenang-bedegung-01.jpg";
 import Link from "next/link";
 
 export default function RootLayout({
