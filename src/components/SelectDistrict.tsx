@@ -29,6 +29,7 @@ const SelectDistrict = () => {
       };
       fetchDistricts();
     } catch (err) {
+      console.error(err);
       throw new Error("gagal mendapatkan data kecamatan");
     }
   }, []);
