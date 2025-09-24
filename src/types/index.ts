@@ -43,3 +43,9 @@ export type Comment = z.infer<typeof insertCommentSchema> & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type District = {
+  id: string;
+  regency_id: string;
+  name: string;
+};

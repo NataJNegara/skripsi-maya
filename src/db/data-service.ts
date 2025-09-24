@@ -1,3 +1,17 @@
+// DISCTRICT DATA
+export async function getDistricts() {
+  try {
+    const res = await fetch(
+      "https://www.emsifa.com/api-wilayah-indonesia/api/districts/1603.json"
+    );
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw new Error("Could not fetch district data.");
+  }
+}
+
 export const destinasiData = [
   {
     id: "1",

@@ -59,6 +59,7 @@ export const insertDestinationSchema = z.object({
     .array(z.string())
     .min(1, "Destinasi wisata harus memiliki setidaknya 1 gambar"),
   coordinate: coordinateSchema,
+  districtId: z.string().min(1, "Kecamatan lokasi wisata harus diisi."),
   location: z.string().min(1, "Alamat atau lokasi wisata harus diisi."),
 });
 

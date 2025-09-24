@@ -32,7 +32,7 @@ const AdminWisataCard = ({ destination }: { destination: Destination }) => {
           <div className="flex items-center justify-between">
             <p
               className={cn(
-                "capitalize text-sm px-4 rounded-full",
+                "capitalize text-sm px-4 py-1 rounded-full",
                 destination.tag === "ALAM"
                   ? "bg-gray-800 text-gray-50"
                   : destination.tag === "BUDAYA"

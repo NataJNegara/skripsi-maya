@@ -15,18 +15,22 @@ import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useFileUpload } from "@/context/FileUploadContext";
+import { getDistricts } from "@/db/data-service";
 import { createDestinationAction } from "@/lib/actions/destinationActions";
 import { insertDestinationSchema } from "@/lib/validator";
+import { District } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import slugify from "slugify";
 import { toast } from "sonner";
@@ -41,10 +45,13 @@ const destinationDefaultValues: z.infer<typeof insertDestinationSchema> = {
   destinationImages: [],
   content: "",
   coordinate: { lat: "", lng: "" },
+  districtId: "",
   location: "",
 };
 
 const CreateWisataForm = () => {
+  const [districts, setDistricts] = useState([]);
+
   const form = useForm<z.infer<typeof insertDestinationSchema>>({
     resolver: zodResolver(insertDestinationSchema),
     defaultValues: destinationDefaultValues,
@@ -66,6 +73,12 @@ const CreateWisataForm = () => {
   };
 
   useEffect(() => {
+    const fetchDistrict = async () => {
+      const data = await getDistricts();
+      setDistricts(data);
+    };
+
+    fetchDistrict();
     setFileToStore([]);
   }, []);
 
@@ -175,20 +188,6 @@ const CreateWisataForm = () => {
           <Uploader />
         </div>
 
-        {/* <FormField
-          control={form.control}
-          name="content"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Konten</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="Konten" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
-
         <FormField
           control={form.control}
           name="content"
@@ -236,6 +235,34 @@ const CreateWisataForm = () => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="districtId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Kecamatan</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Kecamatan" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Kecamatan</SelectLabel>
+                    {districts.map((item: District) => (
+                      <SelectItem value={item.id} key={item.id}>
+                        {item.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

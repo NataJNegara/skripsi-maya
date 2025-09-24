@@ -27,7 +27,7 @@ const Destination = ({ destination }: { destination: DestinationType }) => {
         className="object-cover hover:scale-110 hover:brightness-75 transition-all duration-500"
       />
       <div className="absolute bottom-0 p-4">
-        <Badge className={cn("bg-brand capitalize ", wisataType)}>
+        <Badge className={cn("bg-brand capitalize mb-2", wisataType)}>
           {destination.tag.toLocaleLowerCase()}
         </Badge>
         <div className="text-brand-white">
