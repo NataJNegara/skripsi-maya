@@ -57,7 +57,17 @@ export async function createDestinationAction(
 }
 
 // =========================GET ALL
-export async function getDestinations({ tag }: { tag?: string }) {
+export async function getDestinations({
+  tag,
+  districtId,
+}: {
+  tag?: string;
+  districtId: string;
+}) {
+  // filter wisata by its district
+  const districtFilter: Prisma.DestinationWhereInput =
+    districtId !== "all" && districtId.length !== 0 ? { districtId } : {};
+
   // filter wisata by its tag
   const wisataFilter: Prisma.DestinationWhereInput =
     tag !== "SEMUA" && tag?.length !== 0 ? { tag } : {};
@@ -65,6 +75,7 @@ export async function getDestinations({ tag }: { tag?: string }) {
   const destinations = await prisma.destination.findMany({
     where: {
       ...wisataFilter,
+      ...districtFilter,
     },
   });
 

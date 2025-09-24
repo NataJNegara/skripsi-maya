@@ -1,8 +1,14 @@
 import { getDestinations } from "@/lib/actions/destinationActions";
 import Destination from "./DestinationCard";
 
-const DestinationList = async ({ filterTag }: { filterTag: string }) => {
-  const destinations = await getDestinations({ tag: filterTag });
+const DestinationList = async ({
+  filterTag,
+  districtId,
+}: {
+  filterTag: string;
+  districtId: string;
+}) => {
+  const destinations = await getDestinations({ tag: filterTag, districtId });
 
   if (destinations === null || destinations.length === 0)
     return (

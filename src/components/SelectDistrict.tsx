@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Select,
   SelectContent,
@@ -8,28 +10,44 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getDistricts } from "@/db/data-service";
-import { FormControl } from "./ui/form";
+import { District } from "@/types";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-type district = {
-  id: string;
-  regency_id: string;
-  name: string;
-};
+const SelectDistrict = () => {
+  const [districts, setDistricts] = useState([]);
 
-const SelectDistrict = async () => {
-  const districts = await getDistricts();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    try {
+      const fetchDistricts = async () => {
+        const data = await getDistricts();
+        setDistricts(data);
+      };
+      fetchDistricts();
+    } catch (err) {
+      throw new Error("gagal mendapatkan data kecamatan");
+    }
+  }, []);
+
+  const handleSelect = (districtId: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("districtId", districtId);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   return (
-    <Select>
-      <FormControl>
-        <SelectTrigger className="w-full">
-          <SelectValue placeholder="Kecamatan" />
-        </SelectTrigger>
-      </FormControl>
+    <Select onValueChange={handleSelect}>
+      <SelectTrigger className="w-[200px]">
+        <SelectValue placeholder="Kecamatan" />
+      </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Kecamatan</SelectLabel>
-          {districts.map((item: district) => (
+          {districts.map((item: District) => (
             <SelectItem value={item.id} key={item.id}>
               {item.name}
             </SelectItem>
