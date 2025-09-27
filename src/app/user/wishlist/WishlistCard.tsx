@@ -2,7 +2,7 @@ import DeleteDialog from "@/components/shared/DeleteDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { deleteWishlistAction } from "@/lib/actions/wishlistActions";
-import { cn, formatDateTime, textShorter } from "@/lib/utils";
+import { formatDateTime, textShorter } from "@/lib/utils";
 import { Wishlist } from "@/types";
 import { Info } from "lucide-react";
 import Image from "next/image";
