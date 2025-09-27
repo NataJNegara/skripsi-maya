@@ -1,15 +1,15 @@
-import Filter from "@/components/shared/Filter";
-import DestinationList from "./DestinationList";
-import { Suspense } from "react";
+import FilterDistrict from "@/components/FilterDistrict";
 import Spinner from "@/components/Spinner";
-import SelectDistrict from "@/components/SelectDistrict";
+import { Suspense } from "react";
+import DestinationList from "./DestinationList";
+import FilterCategory from "@/components/FilterCategory";
 
 const Page = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ tag: string; districtId: string }>;
+  searchParams: Promise<{ category: string; districtId: string }>;
 }) => {
-  const { tag = "SEMUA", districtId = "all" } = await searchParams;
+  const { category = "all", districtId = "all" } = await searchParams;
 
   return (
     <div className="page-container">
@@ -25,22 +25,13 @@ const Page = async ({
         terlupakan.
       </p>
 
-      <div className="flex justify-center gap-8 my-16">
-        <Filter
-          filterField="tag"
-          options={[
-            { label: "Semua", value: "SEMUA" },
-            { label: "Alam", value: "ALAM" },
-            { label: "Buatan", value: "BUATAN" },
-            { label: "Budaya", value: "BUDAYA" },
-          ]}
-        />
-
-        <SelectDistrict />
+      <div className="flex justify-center gap-6 my-16">
+        <FilterCategory />
+        <FilterDistrict />
       </div>
 
       <Suspense fallback={<Spinner />}>
-        <DestinationList filterTag={tag} districtId={districtId} />
+        <DestinationList categorySlug={category} districtId={districtId} />
       </Suspense>
     </div>
   );

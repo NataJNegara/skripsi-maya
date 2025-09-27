@@ -24,9 +24,10 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useFileUpload } from "@/context/FileUploadContext";
 import { getDistricts } from "@/db/data-service";
+import { getCategoriesSelect } from "@/lib/actions/categoryActions";
 import { createDestinationAction } from "@/lib/actions/destinationActions";
 import { insertDestinationSchema } from "@/lib/validator";
-import { District } from "@/types";
+import { Category, District } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -39,7 +40,7 @@ import { z } from "zod";
 const destinationDefaultValues: z.infer<typeof insertDestinationSchema> = {
   title: "",
   slug: "",
-  tag: "",
+  categoryId: "",
   preview: "",
   bannerImg: "",
   destinationImages: [],
@@ -51,6 +52,7 @@ const destinationDefaultValues: z.infer<typeof insertDestinationSchema> = {
 
 const CreateWisataForm = () => {
   const [districts, setDistricts] = useState([]);
+  const [categories, setCategories] = useState<Category[] | null>([]);
 
   const form = useForm<z.infer<typeof insertDestinationSchema>>({
     resolver: zodResolver(insertDestinationSchema),
@@ -73,12 +75,17 @@ const CreateWisataForm = () => {
   };
 
   useEffect(() => {
-    const fetchDistrict = async () => {
-      const data = await getDistricts();
-      setDistricts(data);
-    };
+    const fetchSelectData = async () => {
+      const [districts, categories] = await Promise.all([
+        getDistricts(),
+        getCategoriesSelect(),
+      ]);
 
-    fetchDistrict();
+      setDistricts(districts);
+      setCategories(categories);
+    };
+    fetchSelectData();
+
     setFileToStore([]);
   }, []);
 
@@ -144,20 +151,28 @@ const CreateWisataForm = () => {
 
         <FormField
           control={form.control}
-          name="tag"
+          name="categoryId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Tag</FormLabel>
+              <FormLabel>Kategori</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Pilih tag..." />
+                    <SelectValue placeholder="Kategori" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="ALAM">Alam</SelectItem>
-                  <SelectItem value="BUATAN">Buatan</SelectItem>
-                  <SelectItem value="BUDAYA">Budaya</SelectItem>
+                  <SelectGroup>
+                    <SelectLabel>Kategori</SelectLabel>
+                    {categories?.map((item: Category) => (
+                      <SelectItem
+                        value={item.id}
+                        key={item.id}
+                        className="capitalize">
+                        {item.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -256,7 +271,10 @@ const CreateWisataForm = () => {
                   <SelectGroup>
                     <SelectLabel>Kecamatan</SelectLabel>
                     {districts.map((item: District) => (
-                      <SelectItem value={item.id} key={item.id}>
+                      <SelectItem
+                        value={item.id}
+                        key={item.id}
+                        className="capitalize">
                         {item.name}
                       </SelectItem>
                     ))}

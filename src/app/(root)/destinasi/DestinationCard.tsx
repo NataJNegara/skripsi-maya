@@ -5,15 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Destination = ({ destination }: { destination: DestinationType }) => {
-  let wisataType;
-  if (destination.tag.toLowerCase() === "alam") {
-    wisataType = "bg-brand text-brand-white";
-  } else if (destination.tag.toLowerCase() === "buatan") {
-    wisataType = "bg-brand-white text-brand";
-  } else {
-    wisataType = "bg-brand-accent text-brand-white";
-  }
-
   return (
     <Link
       href={`/destinasi/${destination.slug}`}
@@ -27,8 +18,8 @@ const Destination = ({ destination }: { destination: DestinationType }) => {
         className="object-cover hover:scale-110 hover:brightness-75 transition-all duration-500"
       />
       <div className="absolute bottom-0 p-4">
-        <Badge className={cn("bg-brand capitalize mb-2", wisataType)}>
-          {destination.tag.toLocaleLowerCase()}
+        <Badge className={cn("bg-brand-secondary capitalize mb-2")}>
+          {destination.category.name}
         </Badge>
         <div className="text-brand-white">
           <p className="text-lg xl:text-2xl font-semibold capitalize">

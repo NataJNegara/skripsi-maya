@@ -4,15 +4,19 @@ import { getDestinationsAdmin } from "@/lib/actions/destinationActions";
 
 type WisataListProps = {
   page: string;
-  category: string;
+  categoryId: string;
   searchQuery: string;
 };
 
-const WisataList = async ({ page, category, searchQuery }: WisataListProps) => {
+const WisataList = async ({
+  page,
+  categoryId,
+  searchQuery,
+}: WisataListProps) => {
   const { destinations, totalData, pageCount } = await getDestinationsAdmin({
     page: Number(page),
     searchQuery,
-    tag: category,
+    categoryId,
   });
 
   if (!destinations)

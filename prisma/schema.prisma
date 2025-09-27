@@ -76,7 +76,7 @@ model Destination {
   id                String   @id @default(cuid())
   title             String
   slug              String   @unique @map("destination_slug_idx")
-  tag               String
+  categoryId        String
   preview           String
   content           String
   bannerImg         String
@@ -89,6 +89,7 @@ model Destination {
   updatedAt DateTime   @updatedAt
   Wishlist  Wishlist[]
   Comment   Comment[]
+  category  Category   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 }
 
 model Wishlist {
@@ -112,4 +113,17 @@ model Comment {
 
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String
+  tagline     String
+  description String
+  bannerImg   String
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @updatedAt
+
+  Destination Destination[]
 }

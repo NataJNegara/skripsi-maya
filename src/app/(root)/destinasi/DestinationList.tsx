@@ -2,13 +2,13 @@ import { getDestinations } from "@/lib/actions/destinationActions";
 import Destination from "./DestinationCard";
 
 const DestinationList = async ({
-  filterTag,
+  categorySlug,
   districtId,
 }: {
-  filterTag: string;
+  categorySlug: string;
   districtId: string;
 }) => {
-  const destinations = await getDestinations({ tag: filterTag, districtId });
+  const destinations = await getDestinations({ categorySlug, districtId });
 
   if (destinations === null || destinations.length === 0)
     return (

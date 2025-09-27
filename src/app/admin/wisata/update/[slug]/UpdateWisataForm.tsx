@@ -15,15 +15,19 @@ import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useFileUpload } from "@/context/FileUploadContext";
+import { getDistricts } from "@/db/data-service";
+import { getCategoriesSelect } from "@/lib/actions/categoryActions";
 import { updateDestinationAction } from "@/lib/actions/destinationActions";
 import { coordinateSchema, updateDestinationSchema } from "@/lib/validator";
-import { Destination } from "@/types";
+import { Category, Destination, District } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, Loader2, Trash2Icon } from "lucide-react";
 import Image from "next/image";
@@ -36,6 +40,8 @@ import { z } from "zod";
 
 const UpdateWisataForm = ({ destination }: { destination: Destination }) => {
   const [isDeletingImage, setIsDeletingImage] = useState(false);
+  const [districts, setDistricts] = useState([]);
+  const [categories, setCategories] = useState<Category[] | null>([]);
 
   const form = useForm<z.infer<typeof updateDestinationSchema>>({
     resolver: zodResolver(updateDestinationSchema),
@@ -59,6 +65,17 @@ const UpdateWisataForm = ({ destination }: { destination: Destination }) => {
   };
 
   useEffect(() => {
+    const fetchSelectData = async () => {
+      const [districts, categories] = await Promise.all([
+        getDistricts(),
+        getCategoriesSelect(),
+      ]);
+
+      setDistricts(districts);
+      setCategories(categories);
+    };
+    fetchSelectData();
+
     if (destination.destinationImages.length > 0) {
       setFileToStore([]);
 
@@ -153,20 +170,28 @@ const UpdateWisataForm = ({ destination }: { destination: Destination }) => {
 
         <FormField
           control={form.control}
-          name="tag"
+          name="categoryId"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Tag</FormLabel>
+              <FormLabel>Kategori</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Pilih tag..." />
+                    <SelectValue placeholder="Kategori" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="ALAM">Alam</SelectItem>
-                  <SelectItem value="BUATAN">Buatan</SelectItem>
-                  <SelectItem value="BUDAYA">Budaya</SelectItem>
+                  <SelectGroup>
+                    <SelectLabel>Kategori</SelectLabel>
+                    {categories?.map((item: Category) => (
+                      <SelectItem
+                        value={item.id}
+                        key={item.id}
+                        className="capitalize">
+                        {item.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -275,6 +300,37 @@ const UpdateWisataForm = ({ destination }: { destination: Destination }) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="districtId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Kecamatan</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Kecamatan" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Kecamatan</SelectLabel>
+                    {districts.map((item: District) => (
+                      <SelectItem
+                        value={item.id}
+                        key={item.id}
+                        className="capitalize">
+                        {item.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}

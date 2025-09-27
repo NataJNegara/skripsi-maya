@@ -58,10 +58,10 @@ export async function createDestinationAction(
 
 // =========================GET ALL
 export async function getDestinations({
-  tag,
+  categorySlug,
   districtId,
 }: {
-  tag?: string;
+  categorySlug?: string;
   districtId: string;
 }) {
   // filter wisata by its district
@@ -69,13 +69,18 @@ export async function getDestinations({
     districtId !== "all" && districtId.length !== 0 ? { districtId } : {};
 
   // filter wisata by its tag
-  const wisataFilter: Prisma.DestinationWhereInput =
-    tag !== "SEMUA" && tag?.length !== 0 ? { tag } : {};
+  const categoryFilter: Prisma.DestinationWhereInput =
+    categorySlug !== "all" && categorySlug?.length !== 0
+      ? { category: { slug: categorySlug } }
+      : {};
 
   const destinations = await prisma.destination.findMany({
     where: {
-      ...wisataFilter,
+      ...categoryFilter,
       ...districtFilter,
+    },
+    include: {
+      category: true,
     },
   });
 
@@ -88,6 +93,9 @@ export async function getDestinations({
 export async function getDestinationBySlug(slug: string) {
   const destination = await prisma.destination.findFirst({
     where: { slug },
+    include: {
+      category: true,
+    },
   });
 
   if (!destination) return null;
@@ -98,14 +106,14 @@ export async function getDestinationBySlug(slug: string) {
 // =========================GET ALL ADMIN DASHBOARD
 
 type GetDestinationsAdminProps = {
-  tag?: string;
+  categoryId?: string;
   searchQuery?: string;
   page: number;
   limit?: number;
 };
 
 export async function getDestinationsAdmin({
-  tag,
+  categoryId,
   searchQuery,
   page,
   limit = PAGE_SIZE,
@@ -116,7 +124,7 @@ export async function getDestinationsAdmin({
 
   // filter wisata by its tag
   const wisataFilter: Prisma.DestinationWhereInput =
-    tag !== "SEMUA" && tag?.length !== 0 ? { tag } : {};
+    categoryId !== "all" && categoryId?.length !== 0 ? { categoryId } : {};
 
   const searchFilter: Prisma.DestinationWhereInput =
     searchQuery && searchQuery.trim().length > 0
@@ -129,6 +137,9 @@ export async function getDestinationsAdmin({
     where: {
       ...wisataFilter,
       ...searchFilter,
+    },
+    include: {
+      category: true,
     },
     orderBy: { createdAt: "desc" },
     skip: (page - 1) * limit,

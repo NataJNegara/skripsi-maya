@@ -1,4 +1,5 @@
 import {
+  insertCategorySchema,
   insertCommentSchema,
   insertDestinationSchema,
   insertPostSchema,
@@ -15,6 +16,7 @@ export type Destination = Omit<
   coordinate: Prisma.JsonValue;
   createdAt: Date;
   updatedAt: Date;
+  category: Category;
 };
 
 export type Coordinate = {
@@ -48,4 +50,14 @@ export type District = {
   id: string;
   regency_id: string;
   name: string;
+};
+
+export type Category = z.infer<typeof insertCategorySchema> & {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type CategoryWithDestination = Category & {
+  Destination: { id: string }[] | null;
 };

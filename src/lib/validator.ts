@@ -48,7 +48,7 @@ export const coordinateSchema = z.object({
 export const insertDestinationSchema = z.object({
   title: z.string().min(6, "Judul harus diisi."),
   slug: z.string().min(1, "Slug harus diisi."),
-  tag: z.string().min(1, "Kategori harus diisi."),
+  categoryId: z.string().min(1, "Kategori harus diisi."),
   preview: z
     .string()
     .min(10, "Tuliskan preview yang sesuai.")
@@ -71,4 +71,15 @@ export const insertCommentSchema = z.object({
   userId: z.string().min(1, "Id User harus diisi."),
   destinationId: z.string().min(1, "Id Wisata harus diisi."),
   text: z.string().min(1, "Komentar tidak boleh kosong").trim(),
+});
+
+export const insertCategorySchema = z.object({
+  name: z.string().min(6, "Nama kategori harus diisi."),
+  slug: z.string().min(6, "Slug kategori harus diisi."),
+  tagline: z.string().min(6, "Tagline kategori harus diisi."),
+  description: z
+    .string()
+    .min(10, "Tuliskan description yang sesuai.")
+    .max(250, "Description tidak boleh lebih dari 150 karakter"),
+  bannerImg: z.string().min(1, "Banner harus diisi"),
 });

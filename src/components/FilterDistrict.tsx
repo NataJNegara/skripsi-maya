@@ -14,7 +14,7 @@ import { District } from "@/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const SelectDistrict = () => {
+const FilterDistrict = () => {
   const [districts, setDistricts] = useState([]);
 
   const searchParams = useSearchParams();
@@ -42,14 +42,17 @@ const SelectDistrict = () => {
 
   return (
     <Select onValueChange={handleSelect}>
-      <SelectTrigger className="w-[200px]">
-        <SelectValue placeholder="Kecamatan" />
+      <SelectTrigger className="w-[360px]">
+        <SelectValue placeholder="Cari berdasarkan kecamatan" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           <SelectLabel>Kecamatan</SelectLabel>
           {districts.map((item: District) => (
-            <SelectItem value={item.id} key={item.id}>
+            <SelectItem
+              value={item.id}
+              key={item.id}
+              className="data-[state=checked]:[&_*]:text-white data-[state=checked]:bg-brand-secondary">
               {item.name}
             </SelectItem>
           ))}
@@ -59,4 +62,4 @@ const SelectDistrict = () => {
   );
 };
 
-export default SelectDistrict;
+export default FilterDistrict;

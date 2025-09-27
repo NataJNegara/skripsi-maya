@@ -9,7 +9,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Bookmark, MountainSnow, Newspaper, UserRound } from "lucide-react";
+import {
+  Bookmark,
+  Grid2x2Check,
+  MountainSnow,
+  Newspaper,
+  UserRound,
+} from "lucide-react";
 
 const adminNav = [
   {
@@ -18,6 +24,11 @@ const adminNav = [
     icon: <Newspaper size={20} />,
   },
   { title: "wisata", href: "/admin/wisata", icon: <MountainSnow size={20} /> },
+  {
+    title: "kategori",
+    href: "/admin/kategori",
+    icon: <Grid2x2Check size={20} />,
+  },
 ];
 
 const userNav = [

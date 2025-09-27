@@ -1,42 +1,44 @@
 import DeleteDialog from "@/components/shared/DeleteDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { deleteDestinationById } from "@/lib/actions/destinationActions";
-import { cn, formatDateTime, textShorter } from "@/lib/utils";
-import { Destination } from "@/types";
+import { deleteCategoryAction } from "@/lib/actions/categoryActions";
+import { textShorter } from "@/lib/utils";
+import { CategoryWithDestination } from "@/types";
 import { SquarePen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const AdminWisataCard = ({ destination }: { destination: Destination }) => {
+const AdminKategoriCard = ({
+  category,
+}: {
+  category: CategoryWithDestination;
+}) => {
   return (
     <div className="border border-brand-secondary grid md:grid-cols-[1fr_auto]">
       <div className="flex flex-col md:flex-row gap-2">
         <div className="relative w-full md:w-[150px] h-42 md:h-32">
           <Image
-            src={destination.bannerImg}
+            src={category.bannerImg}
             alt="contoh gambar"
             quality={50}
             fill
             className="object-cover"
           />
         </div>
-        <div className="p-2 flex flex-col w-full">
+        <div className="p-2 flex flex-col gap-2 w-full">
           <div className="flex flex-col gap-2">
             <Link
-              href={`/destinasi/${destination.slug}`}
+              href={`/destinasi?category=${category.slug}`}
               className="font-semibold capitalize">
-              {destination.title}
+              {category.name}
             </Link>
-            <p className="text-sm">{textShorter(destination.preview)}</p>
+            <p className="text-sm">{category.tagline}</p>
+            <p className="text-sm">{textShorter(category.description)}</p>
           </div>
-          <div className="flex items-center justify-between mt-auto">
-            <Badge className="capitalize bg-brand-secondary">
-              {destination.category.name}
+          <div className="mt-auto">
+            <Badge className="bg-brand-secondary!">
+              Total Destinasi: {category.Destination?.length}
             </Badge>
-            <p className="text-xs px-4 italic text-gray-500">
-              {formatDateTime(destination.createdAt).dateTime}
-            </p>
           </div>
         </div>
       </div>
@@ -45,17 +47,17 @@ const AdminWisataCard = ({ destination }: { destination: Destination }) => {
           asChild
           className="rounded-none bg-transparent hover:bg-yellow-500 text-brand hover:text-brand-white-alt">
           <Link
-            href={`/admin/wisata/update/${destination.slug}`}
+            href={`/admin/wisata/update/${category.slug}`}
             className="flex gap-2 items-center justify-center flex-grow border-b border-brand-secondary px-4 py-2 font-semibold ">
             <SquarePen size={16} />
             <span>Ubah</span>
           </Link>
         </Button>
 
-        <DeleteDialog id={destination.id} action={deleteDestinationById} />
+        <DeleteDialog id={category.id} action={deleteCategoryAction} />
       </div>
     </div>
   );
 };
 
-export default AdminWisataCard;
+export default AdminKategoriCard;
