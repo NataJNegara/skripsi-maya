@@ -1,11 +1,10 @@
+import FilterCategory from "@/components/FilterCategory";
 import SearchBar from "@/components/SearchBar";
 import Spinner from "@/components/Spinner";
-import Filter from "@/components/shared/Filter";
 import { CirclePlus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import WisataList from "./WisataList";
-import FilterCategory from "@/components/FilterCategory";
 
 type WisataPageProps = {
   searchParams: Promise<{
