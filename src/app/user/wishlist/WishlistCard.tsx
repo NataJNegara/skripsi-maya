@@ -23,21 +23,17 @@ const WishlistCard = ({ wish }: { wish: Wishlist }) => {
       </div>
 
       <div className="flex flex-col flex-grow px-4 py-2 md:px-6 md:py-2">
-        <p className="text-lg font-semibold capitalize">
-          {wish.destination.title}
-        </p>
-        <p className="text-sm">{textShorter(wish.destination.preview)}</p>
+        <div className="flex flex-col gap-2">
+          <Link
+            href={`/destinasi/${wish.destination.slug}`}
+            className="text-lg font-semibold capitalize">
+            {wish.destination.title}
+          </Link>
+          <p className="text-sm">{textShorter(wish.destination.preview)}</p>
+        </div>
         <div className="py-2 flex items-center mt-auto">
-          <Badge
-            className={cn(
-              "capitalize text-xs px-4 rounded-full",
-              wish.destination.tag === "ALAM"
-                ? "bg-brand text-brand-white-alt"
-                : wish.destination.tag === "BUDAYA"
-                ? "bg-brand-secondary text-brand-white-alt"
-                : "bg-brand-accent text-brand-white-alt"
-            )}>
-            {wish.destination.tag.toLocaleLowerCase()}
+          <Badge className="capitalize text-xs px-4 rounded-full bg-brand-secondary">
+            {wish.destination.category.name}
           </Badge>
           <p className="ml-auto text-xs md:text-sm text-gray-400">
             {formatDateTime(wish.createdAt).dateOnly}

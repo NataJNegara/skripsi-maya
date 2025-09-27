@@ -19,6 +19,16 @@ export type Destination = Omit<
   category: Category;
 };
 
+export type DestinationWithoutCategory = Omit<
+  z.infer<typeof insertDestinationSchema>,
+  "coordinate"
+> & {
+  id: string;
+  coordinate: Prisma.JsonValue;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type Coordinate = {
   lat: number;
   lng: number;

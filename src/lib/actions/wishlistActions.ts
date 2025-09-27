@@ -76,13 +76,17 @@ export async function getMyWishlistAction({
 
   const categoryFilter: Prisma.WishlistWhereInput =
     category !== "SEMUA" && category?.length !== 0
-      ? { destination: { tag: category } }
+      ? { destination: { categoryId: category } }
       : {};
 
   const wishlist = await prisma.wishlist.findMany({
     where: { userId: session?.user.id, ...categoryFilter },
     include: {
-      destination: true,
+      destination: {
+        include: {
+          category: true,
+        },
+      },
     },
     skip: page ? (page - 1) * limit : 0,
     orderBy: { createdAt: "desc" },
