@@ -9,9 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getDistricts } from "@/db/data-service";
 import { getCategoriesSelect } from "@/lib/actions/categoryActions";
-import { Category, District } from "@/types";
+import { Category } from "@/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
