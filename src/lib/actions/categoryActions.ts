@@ -5,6 +5,8 @@ import { PAGE_SIZE } from "../constant";
 import { Prisma } from "@prisma/client";
 import { auth } from "../auth";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { insertCategorySchema } from "../validator";
 
 // =====================================GET ALL CATEGORY
 type GetCategoriesActionProps = {
@@ -97,4 +99,46 @@ export async function getCategoriesSelect() {
   }
 
   return categories;
+}
+
+// =====================================CREATE CATEGORY
+export async function createCategoryAction(
+  data: z.infer<typeof insertCategorySchema>
+) {
+  try {
+    const session = await auth();
+
+    if (!session) {
+      throw new Error("sesi tidak ditemukan");
+    }
+
+    if (session.user.role !== "ADMIN") {
+      throw new Error("sesi tidak valid");
+    }
+
+    const validatedData = insertCategorySchema.parse(data);
+
+    const isCategoryExist = await prisma.category.findFirst({
+      where: { slug: validatedData.slug },
+    });
+
+    if (isCategoryExist) {
+      throw new Error("Category dengan nama yang sama sudah digunakan.");
+    }
+
+    await prisma.category.create({
+      data: validatedData,
+    });
+
+    revalidatePath("/destinasi");
+    revalidatePath("/admin/kategori");
+
+    return { success: true, message: "Kategori baru berhasil diatambahkan." };
+  } catch (err) {
+    console.error(err);
+    return {
+      success: false,
+      message: "Gagal menambahkan wisata, coba lagi nanti.",
+    };
+  }
 }
