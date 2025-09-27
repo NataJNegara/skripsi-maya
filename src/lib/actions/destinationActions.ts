@@ -106,14 +106,14 @@ export async function getDestinationBySlug(slug: string) {
 // =========================GET ALL ADMIN DASHBOARD
 
 type GetDestinationsAdminProps = {
-  categoryId?: string;
+  category?: string;
   searchQuery?: string;
   page: number;
   limit?: number;
 };
 
 export async function getDestinationsAdmin({
-  categoryId,
+  category,
   searchQuery,
   page,
   limit = PAGE_SIZE,
@@ -124,7 +124,9 @@ export async function getDestinationsAdmin({
 
   // filter wisata by its tag
   const wisataFilter: Prisma.DestinationWhereInput =
-    categoryId !== "all" && categoryId?.length !== 0 ? { categoryId } : {};
+    category !== "all" && category?.length !== 0
+      ? { category: { slug: category } }
+      : {};
 
   const searchFilter: Prisma.DestinationWhereInput =
     searchQuery && searchQuery.trim().length > 0

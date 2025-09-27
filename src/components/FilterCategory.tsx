@@ -36,6 +36,7 @@ const FilterCategory = () => {
 
   const handleSelect = (slug: string) => {
     const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
     params.set("category", slug);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };

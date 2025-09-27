@@ -5,6 +5,7 @@ import { CirclePlus } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
 import WisataList from "./WisataList";
+import FilterCategory from "@/components/FilterCategory";
 
 type WisataPageProps = {
   searchParams: Promise<{
@@ -15,11 +16,7 @@ type WisataPageProps = {
 };
 
 const Page = async ({ searchParams }: WisataPageProps) => {
-  const {
-    page = "1",
-    category = "SEMUA",
-    searchQuery = "",
-  } = await searchParams;
+  const { page = "1", category = "all", searchQuery = "" } = await searchParams;
 
   return (
     <div className="">
@@ -38,17 +35,7 @@ const Page = async ({ searchParams }: WisataPageProps) => {
       {/* searchbar & filter */}
       <div className="flex flex-col md:flex-row gap-6 justify-between mb-8">
         <SearchBar />
-        <div className="">
-          <Filter
-            filterField="category"
-            options={[
-              { label: "Semua", value: "SEMUA" },
-              { label: "Alam", value: "ALAM" },
-              { label: "Budaya", value: "BUDAYA" },
-              { label: "Buatan", value: "BUATAN" },
-            ]}
-          />
-        </div>
+        <FilterCategory />
       </div>
 
       {searchQuery.length > 0 && (
