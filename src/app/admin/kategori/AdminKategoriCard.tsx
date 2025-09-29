@@ -47,7 +47,7 @@ const AdminKategoriCard = ({
           asChild
           className="rounded-none bg-transparent hover:bg-yellow-500 text-brand hover:text-brand-white-alt">
           <Link
-            href={`/admin/wisata/update/${category.slug}`}
+            href={`/admin/kategori/update/${category.slug}`}
             className="flex gap-2 items-center justify-center flex-grow border-b border-brand-secondary px-4 py-2 font-semibold ">
             <SquarePen size={16} />
             <span>Ubah</span>

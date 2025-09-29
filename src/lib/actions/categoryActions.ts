@@ -1,12 +1,12 @@
 "use server";
 
 import { prisma } from "@/db/prisma";
-import { PAGE_SIZE } from "../constant";
+import { BASE_URL, PAGE_SIZE } from "../constant";
 import { Prisma } from "@prisma/client";
 import { auth } from "../auth";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { insertCategorySchema } from "../validator";
+import { insertCategorySchema, updateCategorySchema } from "../validator";
 
 // =====================================GET ALL CATEGORY
 type GetCategoriesActionProps = {
@@ -70,6 +70,24 @@ export async function deleteCategoryAction(id: string) {
     if (!category) {
       throw new Error("category tidak ditemukan");
     }
+
+    // DELETE IMAGE FROM S3 BUCKET(TIGRIS)
+    const deleteImages = async (fileUrl: string) => {
+      const imageKey = fileUrl.split("/")[3];
+
+      const res = await fetch(`${BASE_URL}/api/s3/delete`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          key: imageKey,
+        }),
+      });
+
+      if (!res.ok) throw new Error("failed to delete image");
+      console.log(`image ${imageKey} deleted`);
+    };
+
+    deleteImages(category.bannerImg);
 
     await prisma.category.delete({
       where: { id },
@@ -139,6 +157,64 @@ export async function createCategoryAction(
     return {
       success: false,
       message: "Gagal menambahkan wisata, coba lagi nanti.",
+    };
+  }
+}
+
+// =====================================GET CATEGORY BY SLUG
+export async function getCategoryBySlug(slug: string) {
+  const category = await prisma.category.findFirst({
+    where: { slug },
+  });
+
+  return category;
+}
+
+// =====================================UPDATE CATEGORY
+export async function updateCategoryAction(
+  data: z.infer<typeof updateCategorySchema>
+) {
+  try {
+    const session = await auth();
+
+    if (!session) {
+      throw new Error("sesi tidak ditemukan");
+    }
+
+    if (session.user.role !== "ADMIN") {
+      throw new Error("sesi tidak valid");
+    }
+
+    const validatedData = updateCategorySchema.parse(data);
+
+    const oldCategory = await prisma.category.findFirst({
+      where: { id: validatedData.id },
+    });
+
+    if (oldCategory && validatedData.slug !== oldCategory.slug) {
+      const isCategoryExist = await prisma.category.findFirst({
+        where: { slug: validatedData.slug },
+      });
+
+      if (isCategoryExist) {
+        throw new Error("Category dengan nama yang sama sudah digunakan.");
+      }
+    }
+
+    await prisma.category.update({
+      where: { id: validatedData.id },
+      data: validatedData,
+    });
+
+    revalidatePath("/destinasi");
+    revalidatePath("/admin/kategori");
+
+    return { success: true, message: "Kategori berhasil diperbarui" };
+  } catch (err) {
+    console.error(err);
+    return {
+      success: false,
+      message: "Gagal memperbarui kategori, coba lagi nanti.",
     };
   }
 }

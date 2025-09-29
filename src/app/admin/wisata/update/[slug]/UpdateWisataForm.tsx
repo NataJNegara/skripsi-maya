@@ -109,7 +109,7 @@ const UpdateWisataForm = ({ destination }: { destination: Destination }) => {
       });
 
       if (!res.ok) {
-        return toast.error("Failed to delete image");
+        return toast.error("Gagal menghapus gambar");
       }
 
       const { message } = await res.json();

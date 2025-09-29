@@ -83,3 +83,7 @@ export const insertCategorySchema = z.object({
     .max(250, "Description tidak boleh lebih dari 150 karakter"),
   bannerImg: z.string().min(1, "Banner harus diisi"),
 });
+
+export const updateCategorySchema = insertCategorySchema.extend({
+  id: z.string().min(1, "Id Wajib diisi."),
+});
